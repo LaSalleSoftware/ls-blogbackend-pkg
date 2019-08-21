@@ -31,5 +31,27 @@
 |
 */
 
-Route::get('/singlearticleblog', 'Lasallesoftware\Blogbackend\Http\Controllers\SinglePostController@ShowSinglePost');
+//Route::get('/api/v1/singlearticleblog', 'Lasallesoftware\Blogbackend\Http\Controllers\SinglePostController@ShowSinglePost');
+
+/*
+Route::group(['middleware' => ['v1/api']], function () {
+    Route::get('/singlearticleblog', 'Lasallesoftware\Blogbackend\Http\Controllers\SinglePostController@ShowSinglePost');
+});
+*/
+
+/*
+Route::group(['middleware' => ['jwt_auth']], function () {
+    Route::get('/api/v1/testapi', 'Lasallesoftware\Blogbackend\Http\Controllers\TestAPIController@Index');
+});
+*/
+
+
+Route::middleware(['jwt_auth'])
+    ->group(function () {
+        Route::get('/api/v1/testapi',           'Lasallesoftware\Blogbackend\Http\Controllers\TestAPIController@Index');
+        Route::get('/api/v1/singlearticleblog', 'Lasallesoftware\Blogbackend\Http\Controllers\SinglePostController@ShowSinglePost');
+});
+
+
+//Route::get('/api/v1/testapi',           'Lasallesoftware\Blogbackend\Http\Controllers\TestAPIController@Index');
 

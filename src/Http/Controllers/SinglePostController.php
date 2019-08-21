@@ -46,6 +46,12 @@ class SinglePostController extends CommonController
     public function ShowSinglePost(Request $request)
     {
 
+        // let's get back to this controller... just want to suppress error messages for now.
+        return response()->json([
+            'error' => ['error_message' => 'Not Found'],
+        ], 404);
+
+
         $token = $request->bearerToken();
 
 

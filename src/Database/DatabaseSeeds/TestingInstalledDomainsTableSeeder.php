@@ -53,6 +53,7 @@ class TestingInstalledDomainsTableSeeder extends BaseSeeder
 
             $this->setUpSimulatedFrontendDomain1();
             $this->setUpSimulatedFrontendDomain2();
+            $this->setUpSimulatedFrontendDomain3();
         }
     }
 
@@ -106,6 +107,33 @@ class TestingInstalledDomainsTableSeeder extends BaseSeeder
 
         DB::table('installeddomain_domaintype')->insert([
             'installed_domain_id'   => $installedDomain->id,
+            'lookup_domain_type_id' => '2',
+        ]);
+    }
+
+    /**
+     * Create hahackintosh.lsv2-basicfrontend-app.com for testing
+     *
+     * @return void
+     */
+    private function setUpSimulatedFrontendDomain3()
+    {
+        DB::table('installed_domains')->insert([
+            'title'       => 'hackintosh.lsv2-basicfrontend-app.com',
+            'description' => 'hackintosh.lsv2-basicfrontend-app.com',
+            'enabled'     => '1',
+            'created_at'  => $this->now,
+            'created_by'  => 1,
+            'updated_at'  => null,
+            'updated_by'  => null,
+            'locked_at'   => null,
+            'locked_by'   => null,
+        ]);
+
+        $installedDomain = $this->getLastInstalledDomain();
+
+        DB::table('installeddomain_domaintype')->insert([
+            'installed_domain_id' => $installedDomain->id,
             'lookup_domain_type_id' => '2',
         ]);
     }
