@@ -32,7 +32,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * Class Category
+ * Class Postupdate
  *
  * @package Lasallesoftware\Library\Blogbackend\Models
  */
@@ -59,7 +59,7 @@ class Postupdate extends CommonModel
         'excerpt',
         'post_id',
         'enabled',
-        'publish_on'
+        'publish_on',
     ];
 
     /**

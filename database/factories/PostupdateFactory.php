@@ -20,6 +20,14 @@
  *
  */
 
+
+/* =========================================================================
+   My custom model events will interfere with the personbydomain_id field.
+   Model::unsetEventDispatcher(); "turns off" model events.
+   ========================================================================= */
+
+
+
 // LaSalle Software
 use Lasallesoftware\Library\Common\Models\CommonModel;
 
@@ -30,20 +38,25 @@ use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 use Carbon\CarbonImmutable;
 
-$factory->define(Lasallesoftware\Blogbackend\Models\Category::class, function (Faker $faker) {
 
-    $title = CommonModel::deepWashText(ucwords($faker->realText(25)));
-    $title = CommonModel::stripCharactersFromText1($title);
+$factory->define(Lasallesoftware\Blogbackend\Models\Postupdate::class, function (Faker $faker) {
+
+    $title   = CommonModel::deepWashText(ucwords($faker->realText(25)));
+    $title   = CommonModel::stripCharactersFromText1($title);
+    $content = CommonModel::washContent($faker->realText(5555));
+    $now     = CarbonImmutable::now();
 
     return [
-        'installed_domain_id' => $faker->numberBetween($min = 1, $max = 4),
+        'installed_domain_id' => $faker->numberBetween($min = 1, $max = 5),
+        'personbydomain_id'   => $faker->numberBetween($min = 1, $max = 5),
+        'post_id'             => 1,
         'title'               => $title,
-        'content'             => CommonModel::washContent($faker->realText(555)),
-        'description'         => CommonModel::washContent($faker->realText(255)),
-        'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE', //$faker->imageUrl(640, 480),
+        'content'             => $content,
+        'excerpt'             => CommonModel::makeExcerpt(null, $content),
         'enabled'             => 1,
+        'publish_on'          => $now,
         'uuid'                => (string)Str::uuid(),
-        'created_at'          => CarbonImmutable::now(),
+        'created_at'          => $now,
         'created_by'          => 1,
         'updated_at'          => null,
         'updated_by'          => null,
@@ -52,4 +65,3 @@ $factory->define(Lasallesoftware\Blogbackend\Models\Category::class, function (F
     ];
 });
 
-//CommonModel::stripCharactersFromText1

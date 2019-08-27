@@ -94,7 +94,7 @@ class Category extends CommonModel
     }
 
     /**
-     * Populate the "lookup_domain_id" field.
+     * Populate the "title" field.
      *
      * @param  Category $category
      */

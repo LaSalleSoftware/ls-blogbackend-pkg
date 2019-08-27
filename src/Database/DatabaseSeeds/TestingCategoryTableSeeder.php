@@ -50,7 +50,7 @@ class TestingCategoryTableSeeder extends BaseSeeder
                 'title'               => 'Music',
                 'content'             => 'Music',
                 'description'         => 'Music',
-                'featured_image'      => null,
+                'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE/info',
                 'uuid'                => 'created_during_initial_seeding',
             ]);
 
@@ -59,7 +59,7 @@ class TestingCategoryTableSeeder extends BaseSeeder
                 'title'               => 'Sports',
                 'content'             => 'Sports',
                 'description'         => 'Sports',
-                'featured_image'      => null,
+                'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE/info',
                 'uuid'                => 'created_during_initial_seeding',
             ]);
 

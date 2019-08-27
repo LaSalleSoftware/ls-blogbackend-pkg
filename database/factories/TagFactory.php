@@ -30,17 +30,15 @@ use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 use Carbon\CarbonImmutable;
 
-$factory->define(Lasallesoftware\Blogbackend\Models\Category::class, function (Faker $faker) {
+$factory->define(Lasallesoftware\Blogbackend\Models\Tag::class, function (Faker $faker) {
 
     $title = CommonModel::deepWashText(ucwords($faker->realText(25)));
     $title = CommonModel::stripCharactersFromText1($title);
 
     return [
-        'installed_domain_id' => $faker->numberBetween($min = 1, $max = 4),
+        'installed_domain_id' => $faker->numberBetween($min = 1, $max = 5),
         'title'               => $title,
-        'content'             => CommonModel::washContent($faker->realText(555)),
         'description'         => CommonModel::washContent($faker->realText(255)),
-        'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE', //$faker->imageUrl(640, 480),
         'enabled'             => 1,
         'uuid'                => (string)Str::uuid(),
         'created_at'          => CarbonImmutable::now(),
@@ -52,4 +50,3 @@ $factory->define(Lasallesoftware\Blogbackend\Models\Category::class, function (F
     ];
 });
 
-//CommonModel::stripCharactersFromText1

@@ -52,10 +52,10 @@ class CreatePostupdatesTable extends BaseMigration
                 $table->increments('id');
 
                 $table->integer('installed_domain_id')->unsigned()->comment('The domain.');
-                $table->foreign('installed_domain_id')->references('id')->on('installed_domains');
+                $table->foreign('installed_domain_id')->references('id')->on('installed_domains')->onDelete('cascade');
 
                 $table->integer('personbydomain_id')->unsigned()->comment('The author.');
-                $table->foreign('personbydomain_id')->references('id')->on('personbydomains');
+                $table->foreign('personbydomain_id')->references('id')->on('personbydomains')->onDelete('cascade');
 
                 $table->integer('post_id')->unsigned();
                 $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
