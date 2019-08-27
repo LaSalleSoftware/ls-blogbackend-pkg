@@ -24,13 +24,12 @@ namespace Lasallesoftware\Blogbackend\JWT\Validation;
 
 // LaSalle Software
 use Lasallesoftware\Library\Authentication\Models\Installed_domains_jwt_key;
+use Lasallesoftware\Library\Authentication\Models\Json_web_token;
 use Lasallesoftware\Library\Profiles\Models\Installed_domain;
+use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
 
 // Laravel classes
 use Illuminate\Http\Response;
-
-// Laravel facade
-use Illuminate\Support\Facades\DB;
 
 // Third party classes
 //https://github.com/lcobucci/jwt/blob/3.3/README.md
@@ -67,17 +66,33 @@ class JWTValidation
      */
     public function validateJWT($jwtToken)
     {
+        if (!$this->isJWTDuplicate($jwtToken))   return ['result' => false, 'claim' => 'signature'];
+
         if (!$this->isSignatureValid($jwtToken)) return ['result' => false, 'claim' => 'signature'];
 
-        if (!$this->isIssClaimValid($jwtToken)) return ['result' => false, 'claim' => 'iss'];
+        if (!$this->isIssClaimValid($jwtToken))  return ['result' => false, 'claim' => 'iss'];
 
-        if (!$this->isAudClaimValid($jwtToken)) return ['result' => false, 'claim' => 'aud'];
+        if (!$this->isAudClaimValid($jwtToken))  return ['result' => false, 'claim' => 'aud'];
 
-        if (!$this->isExpClaimValid($jwtToken)) return ['result' => false, 'claim' => 'exp'];
+        if (!$this->isExpClaimValid($jwtToken))  return ['result' => false, 'claim' => 'exp'];
 
-        if (!$this->isIatClaimValid($jwtToken)) return ['result' => false, 'claim' => 'iat'];
+        if (!$this->isIatClaimValid($jwtToken))  return ['result' => false, 'claim' => 'iat'];
+
+        if (!$this->isJtiClaimValid($jwtToken))  return ['result' => false, 'claim' => 'jti'];
 
         return ['result' => true];
+    }
+
+    /**
+     * Has this JWT been used before?
+     *
+     * @param  Lcobucci\JWT\Builder  $jwtToken    The Json Web Token from the requesting domain
+     * @return bool                               true  = the JWT has *NOT* expired based on its EXP claim
+     *                                            false = the JWT expired based on its EXP claim
+     */
+    public function isJWTDuplicate($jwtToken)
+    {
+        return (is_null(Json_web_token::where('jwt', $jwtToken)->first())) ? true : false;
     }
 
     /**
@@ -184,6 +199,29 @@ class JWTValidation
         ;
 
         return (time() <= $iatIsValidUntil) ? true : false;
+    }
+
+    /**
+     * (JTI claim) When the front-end generates a JWT, the front-end creates a UUID and then embeds this UUID into the JWT
+     * via the JTI claim. Was that sentence "Inside Baseball" or what! The UUID is created by the library package, which
+     * inserts that UUID into the database. It's just one database across all apps, right! So the back-end can see that
+     * UUID. So the UUID embedded in the incoming JWT must exist in the database's "uuids" table. So, if the UUID embedded
+     * in the JWT is not the database, then the JWT is invalid.
+     *
+     * The "jti" (JWT ID) claim provides a unique identifier for the JWT. The identifier value MUST be assigned in a
+     * manner that ensures that there is a negligible probability that the same value will be accidentally assigned
+     * to a different data object; if the application uses multiple issuers, collisions MUST be prevented among values
+     * produced by different issuers as well.  The "jti" claim can be used to prevent the JWT from being replayed.
+     * The "jti" value is a case-sensitive string.  Use of this claim is OPTIONAL.
+     *
+     * The JWT "jti" claim https://tools.ietf.org/html/rfc7519#section-4.1.7
+     *
+     * @param  Lcobucci\JWT\Builder  $jwtToken    The Json Web Token from the requesting domain
+     * @return bool                               true (valid), false (not valid)
+     */
+    public function isJtiClaimValid($jwtToken)
+    {
+        return (is_null(Uuid::where('uuid', $jwtToken->getClaim('jti'))->first())) ? false : true;
     }
 
     /**

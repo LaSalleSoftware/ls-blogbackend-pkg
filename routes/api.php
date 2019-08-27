@@ -45,11 +45,13 @@ Route::group(['middleware' => ['jwt_auth']], function () {
 });
 */
 
+Route::get('facbob', 'Lasallesoftware\Blogbackend\Http\Controllers\FactoryController@Bob');
 
 Route::middleware(['jwt_auth'])
     ->group(function () {
         Route::get('/api/v1/testapi',           'Lasallesoftware\Blogbackend\Http\Controllers\TestAPIController@Index');
         Route::get('/api/v1/singlearticleblog', 'Lasallesoftware\Blogbackend\Http\Controllers\SinglePostController@ShowSinglePost');
+        Route::get('/api/v1/blogplay',          'Lasallesoftware\Blogbackend\Http\Controllers\BlogplayController@Bob');
 });
 
 

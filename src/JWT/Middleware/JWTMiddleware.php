@@ -24,6 +24,7 @@ namespace Lasallesoftware\Blogbackend\JWT\Middleware;
 
 // LaSalle Software
 use Lasallesoftware\Blogbackend\JWT\Validation\JWTValidation;
+use Lasallesoftware\Library\Authentication\Models\Json_web_token;
 
 // Laravel class
 use Illuminate\Http\Request;
@@ -37,21 +38,26 @@ use Closure;
 class JWTMiddleware
 {
     /**
-     * The JWTValidation instance.
-     *
-     * @var Lasallesoftware\Blogbackend\JWT\JWTValidation;
+     * @var Lasallesoftware\Blogbackend\JWT\JWTValidation
      */
     protected $jwtvalidation;
 
     /**
+     * @var Lasallesoftware\Library\Authentication\Models\Json_web_token
+     */
+    protected $jwtModel;
+
+    /**
      * Create a new middleware instance.
      *
-     * @param  \Lasallesoftware\Blogbackend\JWT\JWTValidation  $jwtvalidation
+     * @param  \Lasallesoftware\Blogbackend\JWT\JWTValidation                  $jwtvalidation
+     * @param  \Lasallesoftware\Library\Authentication\Models\Json_web_token   $jwtModel
      * @return void
      */
-    public function __construct(JWTValidation $jwtvalidation)
+    public function __construct(JWTValidation $jwtvalidation, Json_web_token $jwtModel)
     {
         $this->jwtvalidation = $jwtvalidation;
+        $this->jwtModel      = $jwtModel;
     }
 
     /**
@@ -66,6 +72,7 @@ class JWTMiddleware
         // Parse the incoming JWT string into an  Lcobucci\JWT object
         $jwtToken = (new Parser())->parse((string) $request->bearerToken());
 
+        // Validate the JWT
         $validationResult = $this->jwtvalidation->validateJWT($jwtToken);
 
         if (!$validationResult['result']) {
@@ -74,6 +81,8 @@ class JWTMiddleware
                 'errors' => $validationResult['claim'] . ' claim is invalid',
             ], 403);
         }
+
+        $this->jwtModel->saveWithJWT($jwtToken);
 
         return $next($request);
     }
