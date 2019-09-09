@@ -77,8 +77,8 @@ class JWTMiddleware
 
         if (!$validationResult['result']) {
             return response()->json([
-                'message' => 'invalid token',
-                'errors' => $validationResult['claim'] . ' claim is invalid',
+                'error'  => 'invalid token',
+                'reason' => $validationResult['claim'] . ' claim is invalid',
             ], 403);
         }
 

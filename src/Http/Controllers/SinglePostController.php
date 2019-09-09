@@ -25,6 +25,7 @@ namespace Lasallesoftware\Blogbackend\Http\Controllers;
 // LaSalle Software
 
 use Lasallesoftware\Library\Common\Http\Controllers\CommonController;
+use Lasallesoftware\Library\Helpers\GeneralHelpers;
 use Lasallesoftware\Blogbackend\Models\Post;
 use Lasallesoftware\Blogbackend\Models\Category;
 
@@ -43,52 +44,53 @@ use Illuminate\Support\Carbon;
  */
 class SinglePostController extends CommonController
 {
+    use GeneralHelpers;
+
     public function ShowSinglePost(Request $request)
     {
-
-        // let's get back to this controller... just want to suppress error messages for now.
-        /*return response()->json([
-            'error' => ['error_message' => 'Not Found'],
-        ], 404);*/
+        // THE POST
+        $post = $this->getThePost($request->input('slug'));
 
         return response()->json([
-            'message'  => "well hello from SinglePostController::ShowSinglePost()!!!!",
-        ], 200);
+            'error'  => "post->tag count = ". count($post->tag),
+            'reason' => "post->postupdate count = " . count($post->postupdate),
+        ], 404);
 
-        //=======================
+        if (is_null($post)) {
+            return response()->json([
+                'error'  => __('lasallesoftwareblogbackend::blogbackend.error_status_code_404'),
+                'reason' => __('lasallesoftwareblogbackend::blogbackend.error_reason_slug_does_not_exist'),
+            ], 404);
+        }
 
-
-        $token = $request->bearerToken();
-
-
-
-
-        // THESE THINGS COME FROM THE RECEIVED API REQUEST. FOR NOW, JUST ASSUME!
-        $slug                = 'who-is-john-dean';
-        $installed_domain_id = 1;
-
-
-        // THE POST
-        $post = $this->getThePost($slug);
-
+        $installedDomain     = $this->removeHttp($this->getRequestingDomainFromTheHeader($request));
+        $installed_domain_id = DB::table('installed_domains')
+            ->where('title', $installedDomain)
+            ->pluck('id')
+            ->first()
+        ;
         if ($post->installed_domain_id != $installed_domain_id) {
 
             return response()->json([
-                'error' => ['error_message' => 'Unauthorized'],
-            ], 401);
+                'error'  => __('lasallesoftwareblogbackend::blogbackend.error_status_code_404'),
+                'reason' => __('lasallesoftwareblogbackend::blogbackend.error_reason_post_belongs_to_another_domain'),
+            ], 404);
+
         }
 
         if (!$post->enabled) {
 
             return response()->json([
-                'error' => ['error_message' => 'Not Found'],
+                'error'  => __('lasallesoftwareblogbackend::blogbackend.error_status_code_404'),
+                'reason' => __('lasallesoftwareblogbackend::blogbackend.error_reason_post_is_not_enabled'),
             ], 404);
         }
 
         if ($post->publish_on > Carbon::now(null)  ) {
 
             return response()->json([
-                'error' => ['error_message' => 'Not Found'],
+                'error'  => __('lasallesoftwareblogbackend::blogbackend.error_status_code_404'),
+                'reason' => __('lasallesoftwareblogbackend::blogbackend.post_is_not_published'),
             ], 404);
         }
 
@@ -111,6 +113,7 @@ class SinglePostController extends CommonController
         ];
 
 
+        // ********** TAG HAS TO BELONG TO RIGHT INSTALLED DOMAIN!!!!!    *******************//
 
         // THE TAGS
        $tags = $this->getPostTags($post->id);
@@ -127,13 +130,18 @@ class SinglePostController extends CommonController
        }
 
 
+       //App\Post::find(1)->comments;
+
+        $postupdates = Post::find($post->id)->postupdate;
+
 
 
        // THE POST UPDATES
         $transformedPostupdates = [];
-        if (!is_null($post->postupdate)) {
+        //if (!is_null($post->postupdate)) {
+        if (!is_null($postupdates)) {
 
-            foreach ($post->postupdate as $postupdate) {
+            foreach ($postupdates as $postupdate) {
                 if (
                     ($postupdate->installed_domain_id == $installed_domain_id) &&
                     ($postupdate->enabled) &&
@@ -162,8 +170,8 @@ class SinglePostController extends CommonController
             'post'        => $transformedPost,
             'tags'        => $transformedTags,
             'postupdates' => $transformedPostupdates,
-            'token' => $token,
-            'domain' => 'nothing!',
+            //'token' => $token,
+            //'domain' => 'nothing!',
         ], 200);
     }
 
@@ -173,6 +181,7 @@ class SinglePostController extends CommonController
         return Post::with('tag', 'postupdate')
             ->where('slug', $slug)
             ->first()
+            //->get()
         ;
     }
 

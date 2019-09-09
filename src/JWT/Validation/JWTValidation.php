@@ -25,6 +25,7 @@ namespace Lasallesoftware\Blogbackend\JWT\Validation;
 // LaSalle Software
 use Lasallesoftware\Library\Authentication\Models\Installed_domains_jwt_key;
 use Lasallesoftware\Library\Authentication\Models\Json_web_token;
+use Lasallesoftware\Library\Helpers\GeneralHelpers;
 use Lasallesoftware\Library\Profiles\Models\Installed_domain;
 use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
 
@@ -51,6 +52,8 @@ use Lcobucci\JWT\ValidationData;
  */
 class JWTValidation
 {
+    use GeneralHelpers;
+
     protected $time;
 
     public function __construct()
@@ -222,20 +225,5 @@ class JWTValidation
     public function isJtiClaimValid($jwtToken)
     {
         return (is_null(Uuid::where('uuid', $jwtToken->getClaim('jti'))->first())) ? false : true;
-    }
-
-    /**
-     * Remove the "http://" or "https://" from the URL
-     *
-     * @param  string     $url   The URL.
-     * @return string
-     */
-    private function removeHttp(string $url): string
-    {
-        if (substr($url, 0, 7) == "http://") return substr($url, 7, strlen($url));
-
-        if (substr($url, 0, 8) == "https://") return substr($url, 8, strlen($url));
-
-        return $url;
     }
 }

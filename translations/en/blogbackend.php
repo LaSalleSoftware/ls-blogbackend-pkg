@@ -32,4 +32,11 @@ return [
     'resource_label_plural_postupdates'                     => 'Post Updates',
     'resource_label_singular_postupdates'                   => 'Post Update',
 
+    // Error Messages
+    'error_status_code_404'                                => 'This post is not found.',
+    'error_reason_slug_does_not_exist'                     => 'The slug for this post does not exist.',
+    'error_reason_post_belongs_to_another_domain'          => 'This post belongs to another domain.',
+    'error_reason_post_is_not_enabled'                     => 'This post is not enabled.',
+    'error_reason_post_is_not_published'                   => 'This post is not yet published.',
+
 ];

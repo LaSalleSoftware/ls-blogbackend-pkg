@@ -303,8 +303,6 @@ class Post extends CommonModel
      * One postupdates db record must be associated with one, and only one, posts db record.
      * Multiple postupdates db records can be associated with the same posts db record.
      *
-     * One-to-many relationship (https://laravel.com/docs/5.8/eloquent-relationships#one-to-many).
-     *
      * Method name must be:
      *    * the model name,
      *    * NOT the table name,
