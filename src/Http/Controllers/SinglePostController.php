@@ -51,11 +51,6 @@ class SinglePostController extends CommonController
         // THE POST
         $post = $this->getThePost($request->input('slug'));
 
-        return response()->json([
-            'error'  => "post->tag count = ". count($post->tag),
-            'reason' => "post->postupdate count = " . count($post->postupdate),
-        ], 404);
-
         if (is_null($post)) {
             return response()->json([
                 'error'  => __('lasallesoftwareblogbackend::blogbackend.error_status_code_404'),

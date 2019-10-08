@@ -40,6 +40,7 @@ use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
@@ -142,15 +143,6 @@ class Post extends BaseResource
                 ->hideFromIndex()
             ,
 
-            Image::make( __('lasallesoftwarelibrary::general.field_name_featured_image'))
-                ->disableDownload()
-                ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
-                     </ul>'
-                )
-                ->hideFromIndex()
-            ,
-
             Title::make(__('lasallesoftwarelibrary::general.field_name_title'))
                 ->creationRules('unique:posts,title')
                 ->updateRules('unique:posts,title,{{resourceId}}')
@@ -205,6 +197,8 @@ class Post extends BaseResource
                 ->sortable()
             ,
 
+            new Panel(__('lasallesoftwarelibrary::general.panel_featured_image_fields'), $this->featuredimageFields()),
+
 
             new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),
 
@@ -218,6 +212,47 @@ class Post extends BaseResource
 
             //HasOne::make('Lookup_domain', 'lookup_domain', 'Lasallesoftware\Library\Nova\Resources\Lookup_domain'),
             //HasOne::make('Personbydomain'),
+        ];
+    }
+
+    /**
+     * Get the system fields for this resource.
+     *
+     * @return array
+     */
+    public function featuredimageFields()
+    {
+        return [
+            Image::make( __('lasallesoftwarelibrary::general.field_name_featured_image_upload'))
+                ->disableDownload()
+                ->help('<ul>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
+                     </ul>'
+                )
+                ->hideFromIndex()
+            ,
+
+            Textarea::make(__('lasallesoftwarelibrary::general.field_name_featured_image_code'))
+                ->alwaysShow()
+                ->help('<ul>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_code1') .'</li>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_code2') .'</li>
+                     </ul>'
+                )
+                ->hideFromIndex()
+            ,
+
+            Text::make(__('lasallesoftwarelibrary::general.field_name_featured_image_external'))
+                ->help('<ul>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_external1') .'</li>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_external2') .'</li>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_external3') .'</li>
+                     </ul>'
+                )
+                 ->hideFromIndex()
+            ,
         ];
     }
 

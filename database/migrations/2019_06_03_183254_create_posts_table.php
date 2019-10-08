@@ -65,7 +65,9 @@ class CreatePostsTable extends BaseMigration
                 $table->text('content');
                 $table->text('excerpt');
                 $table->string('meta_description');
-                $table->text('featured_image')->nullable();
+                $table->text('featured_image_upload')->nullable();
+                $table->text('featured_image_code')->nullable();
+                $table->text('featured_image_external_file')->nullable();
                 $table->boolean('enabled')->default(true);
                 $table->date('publish_on')->useCurrent();
 
