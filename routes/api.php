@@ -31,29 +31,18 @@
 |
 */
 
-//Route::get('/api/v1/singlearticleblog', 'Lasallesoftware\Blogbackend\Http\Controllers\SinglePostController@ShowSinglePost');
-
-/*
-Route::group(['middleware' => ['v1/api']], function () {
-    Route::get('/singlearticleblog', 'Lasallesoftware\Blogbackend\Http\Controllers\SinglePostController@ShowSinglePost');
-});
-*/
-
-/*
-Route::group(['middleware' => ['jwt_auth']], function () {
-    Route::get('/api/v1/testapi', 'Lasallesoftware\Blogbackend\Http\Controllers\TestAPIController@Index');
-});
-*/
-
-Route::get('facbob', 'Lasallesoftware\Blogbackend\Http\Controllers\FactoryController@Bob');
+// This route will populate the database with sample data
+Route::get('factorydata', 'Lasallesoftware\Blogbackend\Http\Controllers\FactoryController@Bob');
 
 Route::middleware(['jwt_auth'])
     ->group(function () {
-        Route::get('/api/v1/testapi',           'Lasallesoftware\Blogbackend\Http\Controllers\TestAPIController@Index');
-        Route::get('/api/v1/singlearticleblog', 'Lasallesoftware\Blogbackend\Http\Controllers\SinglePostController@ShowSinglePost');
-        Route::get('/api/v1/blogplay',          'Lasallesoftware\Blogbackend\Http\Controllers\BlogplayController@Bob');
-});
+        Route::get('/api/v1/blogrssfeed',          'Lasallesoftware\Blogbackend\Http\Controllers\BlogRSSFeedController@BlogRSSFeed');
+        Route::get('/api/v1/allblogposts',         'Lasallesoftware\Blogbackend\Http\Controllers\AllBlogPostsController@AllBlogPosts');
+        Route::get('/api/v1/allcategoryblogposts', 'Lasallesoftware\Blogbackend\Http\Controllers\AllCategoryBlogPostsController@AllCategoryBlogPosts');
+        Route::get('/api/v1/alltagblogposts',      'Lasallesoftware\Blogbackend\Http\Controllers\AllTagBlogPostsController@AllTagBlogPosts');
+        Route::get('/api/v1/allauthorblogposts',   'Lasallesoftware\Blogbackend\Http\Controllers\AllAuthorBlogPostsController@AllAuthorBlogPosts');
+        Route::get('/api/v1/singleblogpost',       'Lasallesoftware\Blogbackend\Http\Controllers\SingleBlogPostController@SingleBlogPost');
+    }
+);
 
-
-//Route::get('/api/v1/testapi',           'Lasallesoftware\Blogbackend\Http\Controllers\TestAPIController@Index');
 
