@@ -25,6 +25,9 @@
     "require-dev": {
     },
     "autoload": {
+        "classmap": [
+            "database/factories"
+        ],
         "psr-4": {
             "Lasallesoftware\\Blogbackend\\": "src/"
         }

@@ -34,7 +34,7 @@
 // This route will populate the database with sample data
 Route::get('factorydata', 'Lasallesoftware\Blogbackend\Http\Controllers\FactoryController@Bob');
 
-Route::middleware(['jwt_auth'])
+Route::middleware(['jwt_auth'], 'throttle:60,1')
     ->group(function () {
         Route::get('/api/v1/blogrssfeed',          'Lasallesoftware\Blogbackend\Http\Controllers\BlogRSSFeedController@BlogRSSFeed');
         Route::get('/api/v1/allblogposts',         'Lasallesoftware\Blogbackend\Http\Controllers\AllBlogPostsController@AllBlogPosts');
