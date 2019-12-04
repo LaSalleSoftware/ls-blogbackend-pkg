@@ -23,6 +23,7 @@
 namespace Lasallesoftware\Blogbackend\Database\DatabaseSeeds;
 
 // LaSalle Software
+use Lasallesoftware\Blogbackend\Models\Category;
 use Lasallesoftware\Library\Database\DatabaseSeeds\BaseSeeder;
 
 // Laravel Framework
@@ -43,15 +44,16 @@ class CategoryTableSeeder extends BaseSeeder
         $domain_title        = app('config')->get('lasallesoftware-library.lasalle_app_domain_name');
         $installed_domain_id = DB::table('installed_domains')->where('title', $domain_title)->value('id');
 
-        factory(\Lasallesoftware\Blogbackend\Models\Category::class)->create([
-            //'installed_domain_id' => $installed_domain_id,
-            'installed_domain_id' => 1,
-            'title'               => 'Main',
-            'content'             => 'The main blog category',
-            'description'         => 'The main blog category',
-            'featured_image'      => null,
-            'uuid'                => 'created_during_initial_seeding',
-        ]);
+        Category::firstOrCreate(
+            ['installed_domain_id' => 1],
+            [
+                'title'          => 'Main',
+                'content'        => 'The main blog category',
+                'description'    => 'The main blog category',
+                'featured_image' => null,
+                'uuid'           => 'created_during_initial_seeding'
+            ]
+        );
 
 
         // SEE NOTE AT Lasallesoftware\Blogbackend\Database\DatabaseSeeds\TestingCategoryTableSeeder::updateInstalledDomainId !!
