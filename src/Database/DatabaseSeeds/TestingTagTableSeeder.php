@@ -23,6 +23,7 @@
 namespace Lasallesoftware\Blogbackend\Database\DatabaseSeeds;
 
 // LaSalle Software
+use Lasallesoftware\Blogbackend\Models\Tag;
 use Lasallesoftware\Library\Database\DatabaseSeeds\BaseSeeder;
 
 // Laravel Framework
@@ -40,110 +41,125 @@ class TestingTagTableSeeder extends BaseSeeder
      */
     public function run()
     {
-        $domain_title     = app('config')->get('lasallesoftware-library.lasalle_app_domain_name');
+        $domain_title        = app('config')->get('lasallesoftware-library.lasalle_app_domain_name');
         $installed_domain_id = DB::table('installed_domains')->where('title', $domain_title)->value('id');
 
         if ($this->doPopulateWithTestData()) {
 
-            DB::table('tags')->insert([
-                'installed_domain_id' => 1,
-                'title'               => 'Classical Domain 1',
-                'description'         => 'Classical Domain 1',
-                'enabled'             => 1,
-                'uuid'                => 'created_during_initial_seeding',
-                'created_at'          => Carbon::now(),
-                'created_by'          => 1,
-                'updated_at'          => null,
-                'updated_by'          => null,
-                'locked_at'           => null,
-                'locked_by'           => null,
-            ]);
+            // installed_domain_id = 1
+            Tag::firstOrCreate(
+                ['title' => 'Classical Domain 1',],
+                [
+                    'installed_domain_id' => 1,
+                    'description'         => 'Classical Domain 1',
+                    'enabled'             => 1,
+                    'uuid'                => 'created_during_initial_seeding',
+                    'created_at'          => Carbon::now(),
+                    'created_by'          => 1,
+                    'updated_at'          => null,
+                    'updated_by'          => null,
+                    'locked_at'           => null,
+                    'locked_by'           => null,
+                ]
+            );
 
-            DB::table('tags')->insert([
-                'installed_domain_id' => 1,
-                'title'               => 'Blues Domain 1',
-                'description'         => 'Blues Domain 1',
-                'enabled'             => 1,
-                'uuid'                => 'created_during_initial_seeding',
-                'created_at'          => Carbon::now(),
-                'created_by'          => 1,
-                'updated_at'          => null,
-                'updated_by'          => null,
-                'locked_at'           => null,
-                'locked_by'           => null,
-            ]);
+            Tag::firstOrCreate(
+                ['title' => 'Blues Domain 1',],
+                [
+                    'installed_domain_id' => 1,
+                    'description'         => 'Blues Domain 1',
+                    'enabled'             => 1,
+                    'uuid'                => 'created_during_initial_seeding',
+                    'created_at'          => Carbon::now(),
+                    'created_by'          => 1,
+                    'updated_at'          => null,
+                    'updated_by'          => null,
+                    'locked_at'           => null,
+                    'locked_by'           => null,
+                ]
+            );
 
-            DB::table('tags')->insert([
-                'installed_domain_id' => 1,
-                'title'               => 'Jazz Domain 1',
-                'description'         => 'Jazz Domain 1',
-                'enabled'             => 1,
-                'uuid'                => 'created_during_initial_seeding',
-                'created_at'          => Carbon::now(),
-                'created_by'          => 1,
-                'updated_at'          => null,
-                'updated_by'          => null,
-                'locked_at'           => null,
-                'locked_by'           => null,
-            ]);
+            Tag::firstOrCreate(
+                ['title' => 'Jazz Domain 1',],
+                [
+                    'installed_domain_id' => 1,
+                    'description'         => 'Jazz Domain 1',
+                    'enabled'             => 1,
+                    'uuid'                => 'created_during_initial_seeding',
+                    'created_at'          => Carbon::now(),
+                    'created_by'          => 1,
+                    'updated_at'          => null,
+                    'updated_by'          => null,
+                    'locked_at'           => null,
+                    'locked_by'           => null,
+                ]
+            );
 
-            DB::table('tags')->insert([
-                'installed_domain_id' => 2,
-                'title'               => 'Classical Domain 2',
-                'description'         => 'Classical Domain 2',
-                'enabled'             => 1,
-                'uuid'                => 'created_during_initial_seeding',
-                'created_at'          => Carbon::now(),
-                'created_by'          => 1,
-                'updated_at'          => null,
-                'updated_by'          => null,
-                'locked_at'           => null,
-                'locked_by'           => null,
-            ]);
+            // installed_domain_id = 2
+            Tag::firstOrCreate(
+                ['title' => 'Classical Domain 2',],
+                [
+                    'installed_domain_id' => 2,
+                    'description'         => 'Classical Domain 2',
+                    'enabled'             => 1,
+                    'uuid'                => 'created_during_initial_seeding',
+                    'created_at'          => Carbon::now(),
+                    'created_by'          => 1,
+                    'updated_at'          => null,
+                    'updated_by'          => null,
+                    'locked_at'           => null,
+                    'locked_by'           => null,
+                ]
+            );
 
-            DB::table('tags')->insert([
-                'installed_domain_id' => 2,
-                'title'               => 'Blues Domain 2',
-                'description'         => 'Blues Domain 2',
-                'enabled'             => 1,
-                'uuid'                => 'created_during_initial_seeding',
-                'created_at'          => Carbon::now(),
-                'created_by'          => 1,
-                'updated_at'          => null,
-                'updated_by'          => null,
-                'locked_at'           => null,
-                'locked_by'           => null,
-            ]);
+            Tag::firstOrCreate(
+                ['title' => 'Blues Domain 2',],
+                [
+                    'installed_domain_id' => 2,
+                    'description'         => 'Blues Domain 2',
+                    'enabled'             => 1,
+                    'uuid'                => 'created_during_initial_seeding',
+                    'created_at'          => Carbon::now(),
+                    'created_by'          => 1,
+                    'updated_at'          => null,
+                    'updated_by'          => null,
+                    'locked_at'           => null,
+                    'locked_by'           => null,
+                ]
+            );
 
-            DB::table('tags')->insert([
-                'installed_domain_id' => 3,
-                'title'               => 'Classical Domain 3',
-                'description'         => 'Classical Domain 3',
-                'enabled'             => 1,
-                'uuid'                => 'created_during_initial_seeding',
-                'created_at'          => Carbon::now(),
-                'created_by'          => 1,
-                'updated_at'          => null,
-                'updated_by'          => null,
-                'locked_at'           => null,
-                'locked_by'           => null,
-            ]);
+            // installed_domain_id = 3
+            Tag::firstOrCreate(
+                ['title' => 'Classical Domain 3',],
+                [
+                    'installed_domain_id' => 3,
+                    'description'         => 'Classical Domain 3',
+                    'enabled'             => 1,
+                    'uuid'                => 'created_during_initial_seeding',
+                    'created_at'          => Carbon::now(),
+                    'created_by'          => 1,
+                    'updated_at'          => null,
+                    'updated_by'          => null,
+                    'locked_at'           => null,
+                    'locked_by'           => null,
+                ]
+            );
 
-            DB::table('tags')->insert([
-                'installed_domain_id' => 3,
-                'title'               => 'Blues Domain 3',
-                'description'         => 'Blues Domain 3',
-                'enabled'             => 1,
-                'uuid'                => 'created_during_initial_seeding',
-                'created_at'          => Carbon::now(),
-                'created_by'          => 1,
-                'updated_at'          => null,
-                'updated_by'          => null,
-                'locked_at'           => null,
-                'locked_by'           => null,
-            ]);
-
-
+            Tag::firstOrCreate(
+                ['title' => 'Blues Domain 3',],
+                [
+                    'installed_domain_id' => 3,
+                    'description'         => 'Blues Domain 3',
+                    'enabled'             => 1,
+                    'uuid'                => 'created_during_initial_seeding',
+                    'created_at'          => Carbon::now(),
+                    'created_by'          => 1,
+                    'updated_at'          => null,
+                    'updated_by'          => null,
+                    'locked_at'           => null,
+                    'locked_by'           => null,
+                ]
+            );
         }
     }
 }

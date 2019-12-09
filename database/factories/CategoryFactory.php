@@ -51,5 +51,3 @@ $factory->define(Lasallesoftware\Blogbackend\Models\Category::class, function (F
         'locked_by'           => null,
     ];
 });
-
-//CommonModel::stripCharactersFromText1

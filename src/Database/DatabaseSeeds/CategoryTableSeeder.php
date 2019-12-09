@@ -45,13 +45,13 @@ class CategoryTableSeeder extends BaseSeeder
         $installed_domain_id = DB::table('installed_domains')->where('title', $domain_title)->value('id');
 
         Category::firstOrCreate(
-            ['installed_domain_id' => 1],
+            ['title'          => 'Main',],
             [
-                'title'          => 'Main',
-                'content'        => 'The main blog category',
-                'description'    => 'The main blog category',
-                'featured_image' => null,
-                'uuid'           => 'created_during_initial_seeding'
+                'installed_domain_id' => 1,
+                'content'             => 'The main blog category',
+                'description'         => 'The main blog category',
+                'featured_image'      => null,
+                'uuid'                => 'created_during_initial_seeding'
             ]
         );
 

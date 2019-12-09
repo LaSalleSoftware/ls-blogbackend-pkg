@@ -130,6 +130,14 @@ class Postupdate extends CommonModel
     private static function populatePersonbydomainidField($postupdate)
     {
         // without any "save", this following statement actually populates the field!
+
+        // if we are in the midst of the database seeding for the blog test data, then
+        // no one is actually logged in, so we want to use the personbydomain_id specified
+        // in the test data
+        if (defined("BLOGBACKENDDBSEEDINGTESTDATA")) {
+            return;
+        }
+
         $postupdate->personbydomain_id = Auth::id();
     }
 

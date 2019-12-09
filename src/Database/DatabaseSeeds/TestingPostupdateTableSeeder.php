@@ -23,6 +23,7 @@
 namespace Lasallesoftware\Blogbackend\Database\DatabaseSeeds;
 
 // LaSalle Software
+use Lasallesoftware\Blogbackend\Models\Postupdate;
 use Lasallesoftware\Library\Database\DatabaseSeeds\BaseSeeder;
 
 // Laravel Framework
@@ -43,59 +44,65 @@ class TestingPostupdateTableSeeder extends BaseSeeder
     {
         if ($this->doPopulateWithTestData()) {
 
-            DB::table('postupdates')->insert([
-                'installed_domain_id' => 1,
-                'personbydomain_id'   => 1,
-                'post_id'             => 2,
-                'title'               => 'Not This Year - Again!',
-                'content'             => $faker->paragraph(3, true),
-                'excerpt'             => $faker->words(12, true),
-                'enabled'             => 1,
-                'publish_on'          => Carbon::now(),
-                'uuid'                => 'created_during_initial_seeding',
-                'created_at'          => Carbon::now(),
-                'created_by'          => 1,
-                'updated_at'          => null,
-                'updated_by'          => null,
-                'locked_at'           => null,
-                'locked_by'           => null,
-            ]);
+            Postupdate::firstOrCreate(
+                ['title' => 'Not This Year - Again!',],
+                [
+                    'installed_domain_id' => 1,
+                    'personbydomain_id'   => 1,
+                    'post_id'             => 2,
+                    'content'             => $faker->paragraph(3, true),
+                    'excerpt'             => $faker->words(12, true),
+                    'enabled'             => 1,
+                    'publish_on'          => Carbon::now(),
+                    'uuid'                => 'created_during_initial_seeding',
+                    'created_at'          => Carbon::now(),
+                    'created_by'          => 1,
+                    'updated_at'          => null,
+                    'updated_by'          => null,
+                    'locked_at'           => null,
+                    'locked_by'           => null,
+                ]
+            );
 
-            DB::table('postupdates')->insert([
-                'installed_domain_id' => 1,
-                'personbydomain_id'   => 5,
-                'post_id'             => 3,
-                'title'               => 'An Important Update!',
-                'content'             => $faker->paragraph(3, true),
-                'excerpt'             => $faker->words(12, true),
-                'enabled'             => 1,
-                'publish_on'          => Carbon::now(),
-                'uuid'                => 'created_during_initial_seeding',
-                'created_at'          => Carbon::now(),
-                'created_by'          => 1,
-                'updated_at'          => null,
-                'updated_by'          => null,
-                'locked_at'           => null,
-                'locked_by'           => null,
-            ]);
+            Postupdate::firstOrCreate(
+                ['title' => 'An Important Update!',],
+                [
+                    'installed_domain_id' => 1,
+                    'personbydomain_id'   => 5,
+                    'post_id'             => 3,
+                    'content'             => $faker->paragraph(3, true),
+                    'excerpt'             => $faker->words(12, true),
+                    'enabled'             => 1,
+                    'publish_on'          => Carbon::now(),
+                    'uuid'                => 'created_during_initial_seeding',
+                    'created_at'          => Carbon::now(),
+                    'created_by'          => 1,
+                    'updated_at'          => null,
+                    'updated_by'          => null,
+                    'locked_at'           => null,
+                    'locked_by'           => null,
+                ]
+            );
 
-            DB::table('postupdates')->insert([
-                'installed_domain_id' => 1,
-                'personbydomain_id'   => 4,
-                'post_id'             => 2,
-                'title'               => 'A Very Important Update!',
-                'content'             => $faker->paragraph(3, true),
-                'excerpt'             => $faker->words(12, true),
-                'enabled'             => 1,
-                'publish_on'          => Carbon::now(),
-                'uuid'                => 'created_during_initial_seeding',
-                'created_at'          => Carbon::now(),
-                'created_by'          => 1,
-                'updated_at'          => null,
-                'updated_by'          => null,
-                'locked_at'           => null,
-                'locked_by'           => null,
-            ]);
+            Postupdate::firstOrCreate(
+                ['title' => 'A Very Important Update!',],
+                [
+                    'installed_domain_id' => 1,
+                    'personbydomain_id'   => 4,
+                    'post_id'             => 2,
+                    'content'             => $faker->paragraph(3, true),
+                    'excerpt'             => $faker->words(12, true),
+                    'enabled'             => 1,
+                    'publish_on'          => Carbon::now(),
+                    'uuid'                => 'created_during_initial_seeding',
+                    'created_at'          => Carbon::now(),
+                    'created_by'          => 1,
+                    'updated_at'          => null,
+                    'updated_by'          => null,
+                    'locked_at'           => null,
+                    'locked_by'           => null,
+                ]
+            );
 
         }
     }

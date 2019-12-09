@@ -37,12 +37,24 @@ class DatabaseSeeder extends BaseSeeder
         $this->call([
             DomainbydomaintypeTableSeeder::class,
             CategoryTableSeeder::class,
-            TestingInstalledDomainsTableSeeder::class,
-            TestingAdminsForBlogPackageTableSeeder::class,
-            TestingCategoryTableSeeder::class,
-            TestingTagTableSeeder::class,
-            TestingPostTableSeeder::class,
-            TestingPostupdateTableSeeder::class,
         ]);
+
+        if ($this->doPopulateWithTestData()) {
+
+            // we want to let the post and postupdate model events know to use the test data,
+            // especially since there is no one logged in (so cannot use Auth::id())
+            if (! defined('BLOGBACKENDDBSEEDINGTESTDATA')) {
+                define("BLOGBACKENDDBSEEDINGTESTDATA", true);
+            }
+
+            $this->call([
+                TestingInstalledDomainsTableSeeder::class,
+                TestingAdminsForBlogPackageTableSeeder::class,
+                TestingCategoryTableSeeder::class,
+                TestingTagTableSeeder::class,
+                TestingPostTableSeeder::class,
+                TestingPostupdateTableSeeder::class,
+            ]);
+        }
     }
 }

@@ -23,6 +23,7 @@
 namespace Lasallesoftware\Blogbackend\Database\DatabaseSeeds;
 
 // LaSalle Software
+use Lasallesoftware\Blogbackend\Models\Category;
 use Lasallesoftware\Library\Database\DatabaseSeeds\BaseSeeder;
 
 // Laravel Framework
@@ -45,50 +46,78 @@ class TestingCategoryTableSeeder extends BaseSeeder
         if ($this->doPopulateWithTestData()) {
 
             // installed_domain_id = 1
-            factory(\Lasallesoftware\Blogbackend\Models\Category::class)->create([
-                'installed_domain_id' => 1,
-                'title'               => 'Music',
-                'content'             => 'Music',
-                'description'         => 'Music',
-                'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE/info',
-                'uuid'                => 'created_during_initial_seeding',
-            ]);
+            Category::firstOrCreate(
+                ['title' => 'Music',],
+                [
+                    'installed_domain_id' => 1,
+                    'content'             => 'Music',
+                    'description'         => 'Music',
+                    'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE/info',
+                    'uuid'                => 'created_during_initial_seeding',
+                ]
+            );
 
-            factory(\Lasallesoftware\Blogbackend\Models\Category::class)->create([
-                'installed_domain_id' => 1,
-                'title'               => 'Sports',
-                'content'             => 'Sports',
-                'description'         => 'Sports',
-                'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE/info',
-                'uuid'                => 'created_during_initial_seeding',
-            ]);
+            Category::firstOrCreate(
+                ['title' => 'Main',],
+                [
+                    'installed_domain_id' => 1,
+                    'content'             => 'Sports',
+                    'description'         => 'Sports',
+                    'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE/info',
+                    'uuid'                => 'created_during_initial_seeding',
+                ]
+            );
 
 
             // installed_domain_id = 2
-            factory(\Lasallesoftware\Blogbackend\Models\Category::class)->create([
-                'title'               => 'Music For Domain 2',
-                'uuid'                => 'created_during_initial_seeding',
-            ]);
+            Category::firstOrCreate(
+                ['title' => 'Music For Domain 2',],
+                [
+                    'installed_domain_id' => 2,
+                    'content'             => 'Music For Domain 2',
+                    'description'         => 'Music For Domain 2',
+                    'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE/info',
+                    'uuid'                => 'created_during_initial_seeding',
+                ]
+            );
             $this->updateInstalledDomainId(2);
 
-            factory(\Lasallesoftware\Blogbackend\Models\Category::class)->create([
-                'title'               => 'Sports For Domain 2',
-                'uuid'                => 'created_during_initial_seeding',
-            ]);
+            Category::firstOrCreate(
+                ['title' => 'Sports For Domain 2',],
+                [
+                    'installed_domain_id' => 2,
+                    'content'             => 'Sports For Domain 2',
+                    'description'         => 'Sports For Domain 2',
+                    'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE/info',
+                    'uuid'                => 'created_during_initial_seeding',
+                ]
+            );
             $this->updateInstalledDomainId(2);
 
 
             // installed_domain_id = 3
-            factory(\Lasallesoftware\Blogbackend\Models\Category::class)->create([
-                'title'               => 'Music For Domain 3',
-                'uuid'                => 'created_during_initial_seeding',
-            ]);
+            Category::firstOrCreate(
+                ['title' => 'Music For Domain 3',],
+                [
+                    'installed_domain_id' => 3,
+                    'content'             => 'Music For Domain 3',
+                    'description'         => 'Music For Domain 3',
+                    'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE/info',
+                    'uuid'                => 'created_during_initial_seeding',
+                ]
+            );
             $this->updateInstalledDomainId(3);
 
-            factory(\Lasallesoftware\Blogbackend\Models\Category::class)->create([
-                'title'               => 'Sports For Domain 3',
-                'uuid'                => 'created_during_initial_seeding',
-            ]);
+            Category::firstOrCreate(
+                ['title' => 'Sports For Domain 3',],
+                [
+                    'installed_domain_id' => 3,
+                    'content'             => 'Sports For Domain 3',
+                    'description'         => 'Sports For Domain 3',
+                    'featured_image'      => 'https://unsplash.com/photos/s9XDWLJ_LyE/info',
+                    'uuid'                => 'created_during_initial_seeding',
+                ]
+            );
             $this->updateInstalledDomainId(3);
         }
     }
@@ -96,8 +125,7 @@ class TestingCategoryTableSeeder extends BaseSeeder
     /**
      * Update the categories db table's installed_domain_id field with the desired valued.
      *
-     * Incredibly, inexplicably, frustratingly, the factory zaps in "1" for installed_domain_id and cannot, will
-     * not, absolutely refuses, to change the value. Not without spending quality time trying to figure this out.
+     * This method overrides Lasallesoftware\Blogbackend\Database\Factories\CategoryFactory.
      *
      * So, let's just update it after the fact and be done with it.
      *
