@@ -213,6 +213,51 @@ class Post extends BaseResource
         ];
     }
 
+    /**
+     * The featured image fields.
+     *
+     * @return array
+     */
+    public function featuredimageFields()
+    {
+        return [
+            Image::make( __('lasallesoftwarelibrary::general.field_name_featured_image_upload'))
+                ->disk(config('lasallesoftware-library.lasalle_filesystem_disk_where_images_are_stored'))
+                ->disableDownload()
+                ->help('<ul>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
+                     </ul>'
+                )
+                ->hideFromIndex()
+                ->squared('true')
+                ->path(config('lasallesoftware-library.image_path_for_post_nova_resource'))
+                ->maxWidth(100)
+            ,
+
+            Textarea::make(__('lasallesoftwarelibrary::general.field_name_featured_image_code'))
+                ->alwaysShow()
+                ->help('<ul>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_code1') .'</li>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_code2') .'</li>
+                     </ul>'
+                )
+                ->hideFromIndex()
+            ,
+
+            Text::make(__('lasallesoftwarelibrary::general.field_name_featured_image_external_file'))
+                ->help('<ul>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_external1') .'</li>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_external2') .'</li>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_external3') .'</li>
+                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_external4') .'</li>
+                     </ul>'
+                )
+                ->hideFromIndex()
+            ,
+        ];
+    }
 
 
     /**
