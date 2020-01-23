@@ -102,8 +102,7 @@ class Post extends BaseResource
     {
         return Personbydomain::find(Auth::id())->IsOwner()
             || Personbydomain::find(Auth::id())->IsSuperadministrator()
-            || Personbydomain::find(Auth::id())->IsAdministrator()
-        ;
+            || Personbydomain::find(Auth::id())->IsAdministrator();
     }
 
     /**
@@ -140,62 +139,55 @@ class Post extends BaseResource
             BelongsTo::make('Installed_domain', 'installed_domain', 'Lasallesoftware\Novabackend\Nova\Resources\Installed_domain')
                 ->creationRules('required')
                 ->updateRules('required')
-                ->hideFromIndex()
-            ,
+                ->sortable(),
 
             Title::make(__('lasallesoftwarelibrary::general.field_name_title'))
                 ->creationRules('unique:posts,title')
-                ->updateRules('unique:posts,title,{{resourceId}}')
-            ,
+                ->updateRules('unique:posts,title,{{resourceId}}'),
 
             Slug::make('slug')
-                ->hideFromIndex()
-            ,
+                ->hideFromIndex(),
 
             Trix::make(__('lasallesoftwarelibrary::general.field_name_content'))
                 ->alwaysShow()
                 ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_required') .'</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_required') . '</li>
                      </ul>')
                 ->creationRules('required')
                 ->updateRules('required')
-                ->hideFromIndex()
-            ,
+                ->hideFromIndex(),
 
             Excerpt::make(__('lasallesoftwarelibrary::general.field_name_excerpt'))
-                ->hideFromIndex()
-            ,
+                ->hideFromIndex(),
 
             Text::make(__('lasallesoftwarelibrary::general.field_name_meta_description'))
                 ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_meta_description1') .'</li>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_meta_description2') .'</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_meta_description1') . '</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_meta_description2') . '</li>
                      </ul>')
                 ->hideFromIndex()
                 ->creationRules('max:255')
-                ->updateRules('max:255')
-            ,
+                ->updateRules('max:255'),
 
             LookupEnabled::make('enabled'),
 
             Date::make(__('lasallesoftwarelibrary::general.field_name_publish_on'))
                 ->format('DD MMM YYYY')
                 ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_publish_on1') .'</li>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_publish_on2') .'</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_publish_on1') . '</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_publish_on2') . '</li>
                      </ul>')
                 ->sortable()
-                //->creationRules('date', 'after_or_equal:today')
-                //->updateRules('date', 'after_or_equal:today') (do not want to modify the date that was originally entered)
+            //->creationRules('date', 'after_or_equal:today')
+            //->updateRules('date', 'after_or_equal:today') (do not want to modify the date that was originally entered)
             ,
 
             BelongsTo::make('Category')
                 ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_optional') . '</li>
                      </ul>')
                 ->nullable()
-                ->sortable()
-            ,
+                ->sortable(),
 
             new Panel(__('lasallesoftwarelibrary::general.panel_featured_image_fields'), $this->featuredimageFields()),
 
@@ -223,41 +215,41 @@ class Post extends BaseResource
     public function featuredimageFields()
     {
         return [
-            Image::make( __('lasallesoftwarelibrary::general.field_name_featured_image_upload'))
+            Image::make(__('lasallesoftwarelibrary::general.field_name_featured_image_upload'))
                 ->disk(config('lasallesoftware-library.lasalle_filesystem_disk_where_images_are_stored'))
                 ->disableDownload()
-                ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
+                ->help(
+                    '<ul>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_optional') . '</li>
                      </ul>'
                 )
                 ->hideFromIndex()
                 ->squared('true')
                 ->path(config('lasallesoftware-library.image_path_for_post_nova_resource'))
-                ->maxWidth(100)
-            ,
+                ->maxWidth(100),
 
             Textarea::make(__('lasallesoftwarelibrary::general.field_name_featured_image_code'))
                 ->alwaysShow()
-                ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_code1') .'</li>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_code2') .'</li>
+                ->help(
+                    '<ul>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_optional') . '</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_featured_image_code1') . '</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_featured_image_code2') . '</li>
                      </ul>'
                 )
-                ->hideFromIndex()
-            ,
+                ->hideFromIndex(),
 
             Text::make(__('lasallesoftwarelibrary::general.field_name_featured_image_external_file'))
-                ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_external1') .'</li>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_external2') .'</li>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_external3') .'</li>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_featured_image_external4') .'</li>
+                ->help(
+                    '<ul>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_optional') . '</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_featured_image_external1') . '</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_featured_image_external2') . '</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_featured_image_external3') . '</li>
+                         <li>' . __('lasallesoftwarelibrary::general.field_help_featured_image_external4') . '</li>
                      </ul>'
                 )
-                ->hideFromIndex()
-            ,
+                ->hideFromIndex(),
         ];
     }
 
