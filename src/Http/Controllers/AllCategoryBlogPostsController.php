@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Class AllCategoryBlogPostsController
  *
- * @package Lasallesoftware\Library\Authentication\Http\Controllers
+ * @package Lasallesoftware\Blogbackend\Http\Controllers
  */
 class AllCategoryBlogPostsController extends AllBlogPostsBaseController
 {

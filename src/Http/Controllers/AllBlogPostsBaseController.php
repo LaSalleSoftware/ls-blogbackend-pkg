@@ -32,7 +32,7 @@ use Illuminate\Http\Request;
 /**
  * Class AllBlogPostsBaseController
  *
- * @package Lasallesoftware\Library\Authentication\Http\Controllers
+ * @package Lasallesoftware\Blogbackend\Http\Controllers
  */
 class AllBlogPostsBaseController extends CommonController
 {

@@ -36,7 +36,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Class SinglePostController
  *
- * @package Lasallesoftware\Library\Authentication\Http\Controllers
+ * @package Lasallesoftware\Blogbackend\Http\Controllers
  */
 class SingleBlogPostController extends CommonController
 {

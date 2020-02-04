@@ -32,11 +32,11 @@ use Illuminate\Support\Carbon;
 
 
 /**
- * Class AllBlogPostsController
+ * Class HomepageBlogPostsController
  *
  * @package Lasallesoftware\Blogbackend\Http\Controllers
  */
-class AllBlogPostsController extends AllBlogPostsBaseController
+class HomepageBlogPostsController extends AllBlogPostsBaseController
 {
     /**
      * Find the requested post, and provide the response.
@@ -44,10 +44,10 @@ class AllBlogPostsController extends AllBlogPostsBaseController
      * @param  Illuminate\Http\Request  $request
      * @return mixed
      */
-    public function AllBlogPosts(Request $request)
+    public function HomepageBlogPosts(Request $request)
     {
         // Get the posts
-        $posts = $this->getAllTheBlogPosts($request);
+        $posts = $this->getRecentBlogPosts($request);
 
         // If a post was not found...
         if ( (is_null($posts) || (count($posts) == 0)) ) {
@@ -61,25 +61,39 @@ class AllBlogPostsController extends AllBlogPostsBaseController
         // Ok, let's send the data along.
         return response()->json([
             'posts'         => $transformedPosts,
-            'prev_page_url' => $posts->previousPageUrl(),
-            'next_page_url' => $posts->nextPageUrl(),
         ], 200);
 
     }
 
     /**
-     * Get all the posts.
+     * Get recent posts.
      *
      * @param  Illuminate\Http\Request  $request
      * @return mixed
      */
-    private function getAllTheBlogPosts($request)
+    private function getRecentBlogPosts($request)
     {
         return Post::where('installed_domain_id', $this->getInstalledDomainId($request))
             ->where('enabled', 1)
             ->where('publish_on', '<', Carbon::now(null) )
             ->orderBy('publish_on', 'desc')
-            ->simplePaginate($this->getNumberOfItemsDisplayedOnPaginatedPage($request))
+            ->take($this->getNumberOfBlogPostsToDisplayOnTheHomePageFromTheHeader($request))
+            ->get()
         ;
+    }
+
+    /**
+     * Get the number of blog posts to display on the home page, as specified in the request's header.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return string                             Such as "hackintosh.lsv2-basicfrontend-app.com" (omit quotes).
+     */
+    private function getNumberOfBlogPostsToDisplayOnTheHomePageFromTheHeader($request)
+    {
+        $numberPosts = $request->header('NumberOfBlogPostsToDisplayOnTheHomePage');
+
+        if ((is_null($numberPosts)) || (!$numberPosts) || ($numberPosts == '')) return 0;
+
+        return $numberPosts;
     }
 }

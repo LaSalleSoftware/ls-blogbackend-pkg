@@ -38,6 +38,7 @@ Route::middleware(['jwt_auth'], 'throttle:60,1')
     ->group(function () {
         Route::get('/api/v1/blogrssfeed',          'Lasallesoftware\Blogbackend\Http\Controllers\BlogRSSFeedController@BlogRSSFeed');
         Route::get('/api/v1/allblogposts',         'Lasallesoftware\Blogbackend\Http\Controllers\AllBlogPostsController@AllBlogPosts');
+        Route::get('/api/v1/homepageblogposts',    'Lasallesoftware\Blogbackend\Http\Controllers\HomepageBlogPostsController@HomepageBlogPosts');
         Route::get('/api/v1/allcategoryblogposts', 'Lasallesoftware\Blogbackend\Http\Controllers\AllCategoryBlogPostsController@AllCategoryBlogPosts');
         Route::get('/api/v1/alltagblogposts',      'Lasallesoftware\Blogbackend\Http\Controllers\AllTagBlogPostsController@AllTagBlogPosts');
         Route::get('/api/v1/allauthorblogposts',   'Lasallesoftware\Blogbackend\Http\Controllers\AllAuthorBlogPostsController@AllAuthorBlogPosts');
