@@ -182,11 +182,9 @@ class Postupdate extends BaseResource
 
             LookupEnabled::make('enabled'),
 
-
-            new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),
-
-
             Uuid::make('uuid'),
+
+            new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),            
         ];
     }
 

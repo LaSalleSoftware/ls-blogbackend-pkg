@@ -189,14 +189,9 @@ class Post extends BaseResource
                 ->nullable()
                 ->sortable(),
 
+            Uuid::make('uuid'),    
+
             new Panel(__('lasallesoftwarelibrary::general.panel_featured_image_fields'), $this->featuredimageFields()),
-
-
-            new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),
-
-
-            Uuid::make('uuid'),
-
 
             BelongsToMany::make('Tag')->singularLabel('Tag'),
 
@@ -204,6 +199,8 @@ class Post extends BaseResource
 
             //HasOne::make('Lookup_domain', 'lookup_domain', 'Lasallesoftware\Library\Nova\Resources\Lookup_domain'),
             //HasOne::make('Personbydomain'),
+
+            new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),
         ];
     }
 

@@ -167,13 +167,11 @@ class Category extends BaseResource
 
             LookupEnabled::make('enabled'),
 
-
-            new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),
-
+            HasMany::make('Post'),
 
             Uuid::make('uuid'),
 
-            HasMany::make('Post'),
+            new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),
         ];
     }
 

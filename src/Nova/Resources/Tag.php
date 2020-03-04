@@ -148,15 +148,11 @@ class Tag extends BaseResource
 
             LookupEnabled::make('enabled'),
 
-
-
-            new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),
-
-
             Uuid::make('uuid'),
 
-
             BelongsToMany::make('Post')->singularLabel('Post'),
+
+            new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),
         ];
     }
 
