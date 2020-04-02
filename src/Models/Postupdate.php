@@ -149,7 +149,8 @@ class Postupdate extends CommonModel
     private static function populateInstalledDomainidField(Postupdate $postupdate)
     {
         // without any "save", this following statement actually populates the field!
-        $postupdate->installed_domain_id = self::getCurrentInstalleddomainId();
+        // need the installed_domain_id of the post!
+        $postupdate->installed_domain_id = $postupdate->post->installed_domain_id;
     }
 
     /**
