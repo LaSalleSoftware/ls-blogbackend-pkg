@@ -46,6 +46,7 @@ use Illuminate\Http\Request;
 
 // Laravel facade
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 /**
@@ -232,8 +233,11 @@ class Category extends BaseResource
      */
     public static function relatableQuery(NovaRequest $request, $query)
     {
-        //self::getRelatableQueryForThisResource($query);
-        return $query;
+        // display categories that belong to the same installed_domain_id as the post's installed_domain_id.
+        // Yes, this will result in a no categories displaying in the "create post". I have new help text for this. 
+        $post_installed_domain_id = DB::table('posts')->where('id', $request->resourceId)->pluck('installed_domain_id')->first();
+
+        return $query->where('installed_domain_id', $post_installed_domain_id);
     }
 
     /**
