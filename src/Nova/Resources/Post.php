@@ -184,6 +184,7 @@ class Post extends BaseResource
 
             BelongsTo::make('Category')
                 ->help('<ul>
+                         <li>' . __('lasallesoftwareblogbackend::blogbackend.field_help_contact_only_see_when_editing') . '</li>
                          <li>' . __('lasallesoftwarelibrary::general.field_help_optional') . '</li>
                      </ul>')
                 ->nullable()

@@ -32,6 +32,9 @@ return [
     'resource_label_plural_postupdates'           => 'Post Updates',
     'resource_label_singular_postupdates'         => 'Post Update',
 
+    // Nova Field Help
+    'field_help_contact_only_see_when_editing'    => 'There will be no categories displayed when you first create a post. Please click the "Update & Continue Editing" button below to see your available categories.',
+
     // Error Messages
     'error_status_code_404'                       => 'This post is not found.',
     'error_reason_slug_does_not_exist'            => 'The slug for this post does not exist.',
