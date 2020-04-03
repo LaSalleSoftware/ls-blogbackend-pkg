@@ -213,19 +213,20 @@ class Tag extends BaseResource
      */
     public static function relatableQuery(NovaRequest $request, $query)
     {
-        // Exclude the tags already associated (attached) to a post in the "Attach Tag (to post)" drop-down
+        // (1) Exclude the tags already associated (attached) to a post in the "Attach Tag (to post)" drop-down
         // because we do not want tags that are already associated (attached) to the post to appear in the
         // drop-down (can you tell that it is well past midnight?!).
 
         // $request->resourceId is the id of the posts db table, not the tags db table
+        $tagsAttachedToPost = DB::table('post_tag')->where('post_id', $request->resourceId)->get();
 
-        $tagsAttachedToPost = DB::table('post_tag')
-            ->where('post_id', $request->resourceId)
-            ->get()
-        ;
+        // (2) tags must belong to the post's installed_domain_id
+        $post_installed_domain_id = DB::table('posts')->where('id', $request->resourceId)->pluck('installed_domain_id')->first();
 
         // the second param of "whereNotIn" must be an array
-        return $query->whereNotIn('id', $tagsAttachedToPost->pluck('tag_id')->toArray());
+        return $query->whereNotIn('id', $tagsAttachedToPost->pluck('tag_id')->toArray())
+                     ->where('installed_domain_id', $post_installed_domain_id)
+        ;
     }
 
     /**
