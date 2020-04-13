@@ -58,7 +58,7 @@ class TestingCategoryTableSeeder extends BaseSeeder
             );
 
             Category::firstOrCreate(
-                ['title' => 'Main',],
+                ['title' => 'Sports',],
                 [
                     'installed_domain_id' => 1,
                     'content'             => 'Sports',
