@@ -15,8 +15,8 @@
  * @author     Bob Bloom
  * @email      bob.bloom@lasallesoftware.ca
  * @link       https://lasallesoftware.ca
- * @link       https://packagist.org/packages/lasallesoftware/lsv2-basicfrontend-app
- * @link       https://github.com/LaSalleSoftware/lsv2-adminbackend-app
+ * @link       https://packagist.org/packages/lasallesoftware/ls-basicfrontend-app
+ * @link       https://github.com/LaSalleSoftware/ls-adminbackend-app
  *
  */
 

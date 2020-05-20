@@ -15,8 +15,8 @@
  * @author     Bob Bloom
  * @email      bob.bloom@lasallesoftware.ca
  * @link       https://lasallesoftware.ca
- * @link       https://packagist.org/packages/lasallesoftware/lsv2-blogbackend-pkg
- * @link       https://github.com/LaSalleSoftware/lsv2-blogbackend-pkg
+ * @link       https://packagist.org/packages/lasallesoftware/ls-blogbackend-pkg
+ * @link       https://github.com/LaSalleSoftware/ls-blogbackend-pkg
  *
  */
 
@@ -116,16 +116,16 @@ class TestingInstalledDomainsTableSeeder extends BaseSeeder
     }
 
     /**
-     * Create hackintosh.lsv2-basicfrontend-app.com for testing
+     * Create hackintosh.ls-basicfrontend-app.com for testing
      *
      * @return void
      */
     private function setUpSimulatedFrontendDomain3()
     {
         Installed_domain::firstOrCreate(
-            ['title' => 'hackintosh.lsv2-basicfrontend-app.com'],
+            ['title' => 'hackintosh.ls-basicfrontend-app.com'],
             [
-                'description' => 'hackintosh.lsv2-basicfrontend-app.com',
+                'description' => 'hackintosh.ls-basicfrontend-app.com',
                 'enabled'     => '1',
                 'created_at'  => $this->now,
                 'created_by'  => 1,

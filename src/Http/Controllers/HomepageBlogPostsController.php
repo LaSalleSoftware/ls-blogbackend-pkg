@@ -15,8 +15,8 @@
  * @author     Bob Bloom
  * @email      bob.bloom@lasallesoftware.ca
  * @link       https://lasallesoftware.ca
- * @link       https://packagist.org/packages/lasallesoftware/lsv2-blogbackend-pkg
- * @link       https://github.com/LaSalleSoftware/lsv2-blogbackend-pkg
+ * @link       https://packagist.org/packages/lasallesoftware/ls-blogbackend-pkg
+ * @link       https://github.com/LaSalleSoftware/ls-blogbackend-pkg
  *
  */
 
@@ -86,7 +86,7 @@ class HomepageBlogPostsController extends AllBlogPostsBaseController
      * Get the number of blog posts to display on the home page, as specified in the request's header.
      *
      * @param  Illuminate\Http\Request  $request
-     * @return string                             Such as "hackintosh.lsv2-basicfrontend-app.com" (omit quotes).
+     * @return string                             Such as "hackintosh.ls-basicfrontend-app.com" (omit quotes).
      */
     private function getNumberOfBlogPostsToDisplayOnTheHomePageFromTheHeader($request)
     {
