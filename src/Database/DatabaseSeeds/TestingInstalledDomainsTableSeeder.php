@@ -123,9 +123,9 @@ class TestingInstalledDomainsTableSeeder extends BaseSeeder
     private function setUpSimulatedFrontendDomain3()
     {
         Installed_domain::firstOrCreate(
-            ['title' => 'hackintosh.ls-basicfrontend-app.com'],
+            ['title' => 'hackintosh.lsv2-basicfrontend-app.com'],
             [
-                'description' => 'hackintosh.ls-basicfrontend-app.com',
+                'description' => 'hackintosh.lsv2-basicfrontend-app.com',
                 'enabled'     => '1',
                 'created_at'  => $this->now,
                 'created_by'  => 1,
