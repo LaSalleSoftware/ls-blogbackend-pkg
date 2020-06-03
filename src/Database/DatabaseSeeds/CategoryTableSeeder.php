@@ -41,7 +41,7 @@ class CategoryTableSeeder extends BaseSeeder
      */
     public function run()
     {
-        $domain_title        = app('config')->get('lasallesoftware-library.lasalle_app_domain_name');
+        $domain_title        = app('config')->get('lasallesoftware-librarybackend.lasalle_app_domain_name');
         $installed_domain_id = DB::table('installed_domains')->where('title', $domain_title)->value('id');
 
         Category::firstOrCreate(

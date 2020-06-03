@@ -214,7 +214,7 @@ class Post extends BaseResource
     {
         return [
             Image::make(__('lasallesoftwarelibrarybackend::general.field_name_featured_image_upload'))
-                ->disk(config('lasallesoftware-librarybackend.lasalle_filesystem_disk_where_images_are_stored'))
+                ->disk(config('lasallesoftware-librarybackendbackend.lasalle_filesystem_disk_where_images_are_stored'))
                 ->disableDownload()
                 ->help(
                     '<ul>
@@ -223,7 +223,7 @@ class Post extends BaseResource
                 )
                 ->hideFromIndex()
                 ->squared('true')
-                ->path(config('lasallesoftware-librarybackend.image_path_for_post_nova_resource'))
+                ->path(config('lasallesoftware-librarybackendbackend.image_path_for_post_nova_resource'))
                 ->maxWidth(100),
 
             Textarea::make(__('lasallesoftwarelibrarybackend::general.field_name_featured_image_code'))

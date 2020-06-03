@@ -157,14 +157,14 @@ class Category extends BaseResource
             ,
 
             Image::make( __('lasallesoftwarelibrarybackend::general.field_name_featured_image'))
-                ->disk(config('lasallesoftware-librarybackend.lasalle_filesystem_disk_where_images_are_stored'))
+                ->disk(config('lasallesoftware-librarybackendbackend.lasalle_filesystem_disk_where_images_are_stored'))
                 ->disableDownload()
                 ->help('<ul>
                          <li>'. __('lasallesoftwarelibrarybackend::general.field_help_optional') .'</li>
                      </ul>'
                 )
                 ->squared('true')
-                ->path(config('lasallesoftware-librarybackend.image_path_for_category_nova_resource')),
+                ->path(config('lasallesoftware-librarybackendbackend.image_path_for_category_nova_resource')),
 
             LookupEnabled::make('enabled'),
 
