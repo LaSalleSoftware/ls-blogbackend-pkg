@@ -27,7 +27,6 @@ use Lasallesoftware\Blogbackend\Commands\BlogcustomseedCommand;
 
 // Laravel classes
 // https://github.com/laravel/framework/blob/5.6/src/Illuminate/Support/ServiceProvider.php
-use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -104,7 +103,7 @@ class BlogbackendServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
         $this->loadMigrations();
 
@@ -115,8 +114,6 @@ class BlogbackendServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         $this->registerFactories();
-
-        $this->registerMiddleware($router);
     }
 
     /**
@@ -157,15 +154,5 @@ class BlogbackendServiceProvider extends ServiceProvider
     protected function registerFactories()
     {
         $this->app->make('Illuminate\Database\Eloquent\Factory')->load(__DIR__ . '/../database/factories');
-    }
-
-    /**
-     * Load this package's middleware
-     *
-     * @return void
-     */
-    protected function registerMiddleware($router)
-    {
-        $router->pushMiddlewareToGroup('jwt_auth', \Lasallesoftware\Blogbackend\JWT\Middleware\JWTMiddleware::class);
     }
 }

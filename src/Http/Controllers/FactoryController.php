@@ -23,7 +23,7 @@
 namespace Lasallesoftware\Blogbackend\Http\Controllers;
 
 // LaSalle Software
-use Lasallesoftware\Library\Common\Http\Controllers\CommonController;
+use Lasallesoftware\Librarybackend\Common\Http\Controllers\CommonController;
 
 use Lasallesoftware\Blogbackend\Database\Factories\CategoryFactory;
 use Lasallesoftware\Blogbackend\Database\Factories\TagFactory;
