@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Class Post
  *
- * @package Lasallesoftware\Library\Blogbackend\Models
+ * @package Lasallesoftware\Blogbackend\Models
  */
 class Post extends CommonModel
 {
@@ -284,7 +284,7 @@ class Post extends CommonModel
      */
     public function installed_domain()
     {
-        return $this->belongsTo('Lasallesoftware\Library\Profiles\Models\Installed_domain');
+        return $this->belongsTo('Lasallesoftware\Librarybackend\Profiles\Models\Installed_domain');
     }
 
     /*
@@ -300,7 +300,7 @@ class Post extends CommonModel
      */
     public function personbydomain()
     {
-        return $this->hasOne('Lasallesoftware\Library\Authentication\Models\Personbydomain');
+        return $this->hasOne('Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain');
     }
 
     /*

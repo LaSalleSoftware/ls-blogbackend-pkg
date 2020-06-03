@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Class Postupdate
  *
- * @package Lasallesoftware\Library\Blogbackend\Models
+ * @package Lasallesoftware\Librarybackend\Blogbackend\Models
  */
 class Postupdate extends CommonModel
 {

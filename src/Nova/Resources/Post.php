@@ -198,7 +198,7 @@ class Post extends BaseResource
 
             HasMany::make('Postupdate'),
 
-            //HasOne::make('Lookup_domain', 'lookup_domain', 'Lasallesoftware\Library\Nova\Resources\Lookup_domain'),
+            //HasOne::make('Lookup_domain', 'lookup_domain', 'Lasallesoftware\Librarybackend\Nova\Resources\Lookup_domain'),
             //HasOne::make('Personbydomain'),
 
             new Panel(__('lasallesoftwarelibrarybackend::general.panel_system_fields'), $this->systemFields()),

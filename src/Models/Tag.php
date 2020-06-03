@@ -28,7 +28,7 @@ use Lasallesoftware\Librarybackend\Common\Models\CommonModel;
 /**
  * Class Category
  *
- * @package Lasallesoftware\Library\Blogbackend\Models
+ * @package Lasallesoftware\Librarybackend\Blogbackend\Models
  */
 class Tag extends CommonModel
 {
@@ -120,7 +120,7 @@ class Tag extends CommonModel
      */
     public function installed_domain()
     {
-        return $this->belongsTo('Lasallesoftware\Library\Profiles\Models\Installed_domain');
+        return $this->belongsTo('Lasallesoftware\Librarybackend\Profiles\Models\Installed_domain');
     }
 
     /*
