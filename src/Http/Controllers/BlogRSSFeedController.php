@@ -48,6 +48,10 @@ class BlogRSSFeedController extends AllBlogPostsBaseController
      */
     public function BlogRSSFeed(Request $request)
     {
+        // Create an UUID
+        $comment = 'Lasallesoftware\Blogbackend\Http\Controllers\BlogRSSFeedController->BlogRSSFeed()';
+        $uuid = $this->createAnUuid(2, $comment, 1);
+
         // Get the posts
         $posts = $this->getAllTheBlogPosts($request);
 

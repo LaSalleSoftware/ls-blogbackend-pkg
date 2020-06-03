@@ -24,6 +24,7 @@ namespace Lasallesoftware\Blogbackend\Http\Controllers;
 
 // LaSalle Software
 use Lasallesoftware\Librarybackend\Common\Http\Controllers\CommonController;
+use Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\UuidGenerator;
 
 // Laravel Framework
 use Illuminate\Http\Request;
@@ -36,6 +37,39 @@ use Illuminate\Http\Request;
  */
 class AllBlogPostsBaseController extends CommonController
 {
+    /**
+     * Uuidgenerator class
+     *
+     * @var Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\UuidGenerator
+     */
+    protected $uuidgenerator;
+    
+
+    /**
+     * Create a new CreateDatabaseRecordController instance
+     *
+     * @param  Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\UuidGenerator  $uuidgenerator
+     * @return void
+     */
+    public function __construct(UuidGenerator $uuidgenerator)
+    {
+        $this->uuidgenerator = $uuidgenerator;
+    }
+
+    /**
+     * Create a UUID
+     *
+     * @param  integer  $lasallesoftware_event_id
+     * @param  string   $comment
+     * @param  integer  $created_by
+     * @return string
+     */
+    public function createAnUuid($lasallesoftware_event_id, $comment, $created_by = 1)
+    {
+        return $this->uuidgenerator->createUuid($lasallesoftware_event_id , $comment, $created_by);
+    }
+
+
     /**
      * Transform a collection of posts (plural!) to whisk off to the front-end.
      *

@@ -46,6 +46,10 @@ class HomepageBlogPostsController extends AllBlogPostsBaseController
      */
     public function HomepageBlogPosts(Request $request)
     {
+        // Create an UUID
+        $comment = 'Lasallesoftware\Blogbackend\Http\Controllers\HomepageBlogPostsController->HomepageBlogPosts()';
+        $uuid = $this->createAnUuid(2, $comment, 1);
+
         // Get the posts
         $posts = $this->getRecentBlogPosts($request);
 

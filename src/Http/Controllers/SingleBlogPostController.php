@@ -48,6 +48,10 @@ class SingleBlogPostController extends CommonController
      */
     public function SingleBlogPost(Request $request)
     {
+        // Create an UUID
+        $comment = 'Lasallesoftware\Blogbackend\Http\Controllers\SingleBlogPostController->SingleBlogPost()';
+        $uuid = $this->createAnUuid(2, $comment, 1);
+
         // Get the requested post
         $post = $this->getThePost($request->query('slug'));
 

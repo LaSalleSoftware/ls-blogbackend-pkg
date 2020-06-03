@@ -49,6 +49,10 @@ class AllAuthorBlogPostsController extends AllBlogPostsBaseController
      */
     public function AllAuthorBlogPosts(Request $request)
     {
+        // Create an UUID
+        $comment = 'Lasallesoftware\Blogbackend\Http\Controllers\AllAuthorBlogPostsController->AllAuthorBlogPosts()';
+        $uuid = $this->createAnUuid(2, $comment, 1);
+
         // Get the posts
         $posts = $this->getAuthorBlogPosts($request);
 

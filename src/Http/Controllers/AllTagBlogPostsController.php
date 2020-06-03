@@ -51,6 +51,10 @@ class AllTagBlogPostsController extends AllBlogPostsBaseController
      */
     public function AllTagBlogPosts(Request $request)
     {
+        // Create an UUID
+        $comment = 'Lasallesoftware\Blogbackend\Http\Controllers\AllTagBlogPostsController->AllTagBlogPosts()';
+        $uuid = $this->createAnUuid(2, $comment, 1);
+
         // Get the posts
         $posts = $this->getTagBlogPosts($request);
 
