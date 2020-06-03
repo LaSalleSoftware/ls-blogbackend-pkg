@@ -23,8 +23,8 @@
 namespace Lasallesoftware\Blogbackend\Policies;
 
 // LaSalle Software class
-use Lasallesoftware\Library\Common\Policies\CommonPolicy;
-use Lasallesoftware\Library\Authentication\Models\Personbydomain as User;
+use Lasallesoftware\Librarybackend\Common\Policies\CommonPolicy;
+use Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain as User;
 use Lasallesoftware\Blogbackend\Models\Postupdate as Model;
 
 // Laravel class
@@ -55,8 +55,8 @@ class PostupdatePolicy extends CommonPolicy
     /**
      * Determine whether the user can view the postupdate details.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Postupdate                 $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Postupdate                       $model
      * @return bool
      */
     public function view(User $user, Model $model)
@@ -83,7 +83,7 @@ class PostupdatePolicy extends CommonPolicy
      *
      * Suppress the create button when there are no posts available.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
      * @return bool
      */
     public function create(User $user)
@@ -104,8 +104,8 @@ class PostupdatePolicy extends CommonPolicy
     /**
      * Determine whether the user can update the postupdates.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Postupdate                 $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Postupdate                        $model
      * @return bool
      */
     public function update(User $user, Model $model)
@@ -135,8 +135,8 @@ class PostupdatePolicy extends CommonPolicy
     /**
      * Determine whether the user can delete the postupdates.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Postupdate                 $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Postupdate                        $model
      * @return bool
      */
     public function delete(User $user, Model $model)
@@ -168,8 +168,8 @@ class PostupdatePolicy extends CommonPolicy
      *
      * DO NOT USE THIS FEATURE!
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Postupdate                 $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Postupdate                        $model
      * @return bool
      */
     public function restore(User $user, Model $model)
@@ -182,8 +182,8 @@ class PostupdatePolicy extends CommonPolicy
      *
      * DO NOT USE THIS FEATURE!
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Postupdate                 $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Postupdate                        $model
      * @return bool
      */
     public function forceDelete(User $user, Model $model)
@@ -207,7 +207,7 @@ class PostupdatePolicy extends CommonPolicy
     /**
      * Are there posts available to a super administrator?
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
      * @return bool
      */
     private function isPostsForSuperadministrator($user)
@@ -218,7 +218,7 @@ class PostupdatePolicy extends CommonPolicy
     /**
      * Are there posts available to an administrator?
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
      * @return bool
      */
     private function isPostsForAdministrator($user)

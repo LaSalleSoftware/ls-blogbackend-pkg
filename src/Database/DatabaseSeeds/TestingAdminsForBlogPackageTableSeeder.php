@@ -23,10 +23,10 @@
 namespace Lasallesoftware\Blogbackend\Database\DatabaseSeeds;
 
 // LaSalle Software
-use Lasallesoftware\Library\Profiles\Models\Person;
-use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\Authentication\Models\Personbydomain;
-use Lasallesoftware\Library\Database\DatabaseSeeds\BaseSeeder;
+use Lasallesoftware\Librarybackend\Profiles\Models\Person;
+use Lasallesoftware\Librarybackend\Profiles\Models\Email;
+use Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain;
+use Lasallesoftware\Librarybackend\Database\DatabaseSeeds\BaseSeeder;
 
 // Laravel Framework
 use Illuminate\Support\Facades\DB;

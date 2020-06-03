@@ -23,7 +23,7 @@
 namespace Lasallesoftware\Blogbackend\Nova\Resources;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Authentication\Models\Personbydomain;
+use Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain;
 use Lasallesoftware\Novabackend\Nova\Fields\Excerpt;
 use Lasallesoftware\Novabackend\Nova\Fields\LookupEnabled;
 use Lasallesoftware\Novabackend\Nova\Fields\Title;
@@ -141,7 +141,7 @@ class Postupdate extends BaseResource
 
             BelongsTo::make('Post', 'post', 'Lasallesoftware\Blogbackend\Nova\Resources\Post')
                 ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_required') .'</li>
+                         <li>'. __('lasallesoftwarelibrarybackend::general.field_help_required') .'</li>
                      </ul>')
                 ->creationRules('required')
                 ->updateRules('required')
@@ -150,30 +150,30 @@ class Postupdate extends BaseResource
                 ->hideWhenUpdating()
             ,
 
-            Title::make(__('lasallesoftwarelibrary::general.field_name_title'))
+            Title::make(__('lasallesoftwarelibrarybackend::general.field_name_title'))
                 ->creationRules('unique:postupdates,title')
                 ->updateRules('unique:postupdates,title,{{resourceId}}')
             ,
 
-            Trix::make(__('lasallesoftwarelibrary::general.field_name_content'))
+            Trix::make(__('lasallesoftwarelibrarybackend::general.field_name_content'))
                 ->alwaysShow()
                 ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_required') .'</li>
+                         <li>'. __('lasallesoftwarelibrarybackend::general.field_help_required') .'</li>
                      </ul>')
                 ->creationRules('required')
                 ->updateRules('required')
                 ->hideFromIndex()
             ,
 
-            Excerpt::make(__('lasallesoftwarelibrary::general.field_name_excerpt'))
+            Excerpt::make(__('lasallesoftwarelibrarybackend::general.field_name_excerpt'))
                 ->hideFromIndex()
             ,
 
-            Date::make(__('lasallesoftwarelibrary::general.field_name_publish_on'))
+            Date::make(__('lasallesoftwarelibrarybackend::general.field_name_publish_on'))
                 ->format('DD MMM YYYY')
                 ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_publish_on1') .'</li>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_publish_on2') .'</li>
+                         <li>'. __('lasallesoftwarelibrarybackend::general.field_help_publish_on1') .'</li>
+                         <li>'. __('lasallesoftwarelibrarybackend::general.field_help_publish_on2') .'</li>
                      </ul>')
                 ->sortable()
                //->creationRules('date', 'after_or_equal:today')
@@ -184,7 +184,7 @@ class Postupdate extends BaseResource
 
             Uuid::make('uuid'),
 
-            new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),            
+            new Panel(__('lasallesoftwarelibrarybackend::general.panel_system_fields'), $this->systemFields()),            
         ];
     }
 

@@ -23,7 +23,7 @@
 namespace Lasallesoftware\Blogbackend\Database\Factories;
 
 // LaSalle Software
-use Lasallesoftware\Library\Common\Factories\CommonFactory;
+use Lasallesoftware\Librarybackend\Common\Factories\CommonFactory;
 
 /**
  * Class TagFactory

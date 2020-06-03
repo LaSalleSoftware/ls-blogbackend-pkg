@@ -23,8 +23,8 @@
 namespace Lasallesoftware\Blogbackend\Policies;
 
 // LaSalle Software class
-use Lasallesoftware\Library\Common\Policies\CommonPolicy;
-use Lasallesoftware\Library\Authentication\Models\Personbydomain as User;
+use Lasallesoftware\Librarybackend\Common\Policies\CommonPolicy;
+use Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain as User;
 use Lasallesoftware\Blogbackend\Models\Category as Model;
 
 // Laravel class
@@ -55,8 +55,8 @@ class CategoryPolicy extends CommonPolicy
     /**
      * Determine whether the user can view the category details.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Category                   $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Category                          $model
      * @return bool
      */
     public function view(User $user, Model $model)
@@ -76,7 +76,7 @@ class CategoryPolicy extends CommonPolicy
     /**
      * Determine whether the user can create categories.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
      * @return bool
      */
     public function create(User $user)
@@ -94,8 +94,8 @@ class CategoryPolicy extends CommonPolicy
     /**
      * Determine whether the user can update the categories.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Category                   $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Category                          $model
      * @return bool
      */
     public function update(User $user, Model $model)
@@ -118,8 +118,8 @@ class CategoryPolicy extends CommonPolicy
     /**
      * Determine whether the user can delete the categories.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Category                   $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Category                          $model
      * @return bool
      */
     public function delete(User $user, Model $model)
@@ -151,8 +151,8 @@ class CategoryPolicy extends CommonPolicy
      *
      * DO NOT USE THIS FEATURE!
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Category                   $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Category                          $model
      * @return bool
      */
     public function restore(User $user, Model $model)
@@ -165,8 +165,8 @@ class CategoryPolicy extends CommonPolicy
      *
      * DO NOT USE THIS FEATURE!
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Category                   $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Category                          $model
      * @return bool
      */
     public function forceDelete(User $user, Model $model)

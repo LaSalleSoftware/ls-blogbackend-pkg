@@ -24,8 +24,8 @@ namespace Lasallesoftware\Blogbackend\Database\DatabaseSeeds;
 
 // LaSalle Software
 use Illuminate\Auth\EloquentUserProvider;
-use Lasallesoftware\Library\Database\DatabaseSeeds\BaseSeeder;
-use Lasallesoftware\Library\Profiles\Models\Installed_domain;
+use Lasallesoftware\Librarybackend\Database\DatabaseSeeds\BaseSeeder;
+use Lasallesoftware\Librarybackend\Profiles\Models\Installed_domain;
 
 // Laravel Framework
 use Illuminate\Support\Facades\DB;
@@ -151,6 +151,6 @@ class TestingInstalledDomainsTableSeeder extends BaseSeeder
      */
     private function getLastInstalledDomain()
     {
-        return \Lasallesoftware\Library\Profiles\Models\Installed_domain::orderBy('id', 'desc')->first();
+        return \Lasallesoftware\Librarybackend\Profiles\Models\Installed_domain::orderBy('id', 'desc')->first();
     }
 }

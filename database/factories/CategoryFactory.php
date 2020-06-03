@@ -21,7 +21,7 @@
  */
 
 // LaSalle Software
-use Lasallesoftware\Library\Common\Models\CommonModel;
+use Lasallesoftware\Librarybackend\Common\Models\CommonModel;
 
 // Laravel class
 use Illuminate\Support\Str;

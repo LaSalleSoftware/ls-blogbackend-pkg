@@ -23,7 +23,7 @@
 namespace Lasallesoftware\Blogbackend\Models;
 
 // LaSalle Software
-use Lasallesoftware\Library\Common\Models\CommonModel;
+use Lasallesoftware\Librarybackend\Common\Models\CommonModel;
 
 /**
  * Class post_tag.

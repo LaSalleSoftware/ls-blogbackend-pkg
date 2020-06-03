@@ -24,7 +24,7 @@ namespace Lasallesoftware\Blogbackend\Database\DatabaseSeeds;
 
 // LaSalle Software
 use Lasallesoftware\Blogbackend\Models\Tag;
-use Lasallesoftware\Library\Database\DatabaseSeeds\BaseSeeder;
+use Lasallesoftware\Librarybackend\Database\DatabaseSeeds\BaseSeeder;
 
 // Laravel Framework
 use Illuminate\Support\Facades\DB;

@@ -23,7 +23,7 @@
 namespace Lasallesoftware\Blogbackend\Nova\Resources;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Authentication\Models\Personbydomain;
+use Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain;
 use Lasallesoftware\Novabackend\Nova\Fields\LookupDescription;
 use Lasallesoftware\Novabackend\Nova\Fields\LookupEnabled;
 use Lasallesoftware\Novabackend\Nova\Fields\Title;
@@ -137,7 +137,7 @@ class Tag extends BaseResource
                 ->hideFromIndex()
             ,
 
-            Title::make(__('lasallesoftwarelibrary::general.field_name_title'))
+            Title::make(__('lasallesoftwarelibrarybackend::general.field_name_title'))
                 ->creationRules('unique:tags,title')
                 ->updateRules('unique:tags,title,{{resourceId}}')
             ,
@@ -152,7 +152,7 @@ class Tag extends BaseResource
 
             BelongsToMany::make('Post')->singularLabel('Post'),
 
-            new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),
+            new Panel(__('lasallesoftwarelibrarybackend::general.panel_system_fields'), $this->systemFields()),
         ];
     }
 

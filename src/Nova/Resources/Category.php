@@ -23,7 +23,7 @@
 namespace Lasallesoftware\Blogbackend\Nova\Resources;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Authentication\Models\Personbydomain;
+use Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain;
 use Lasallesoftware\Novabackend\Nova\Fields\LookupDescription;
 use Lasallesoftware\Novabackend\Nova\Fields\LookupDomain;
 use Lasallesoftware\Novabackend\Nova\Fields\LookupEnabled;
@@ -140,12 +140,12 @@ class Category extends BaseResource
                 ->hideFromIndex()
             ,
 
-            Title::make(__('lasallesoftwarelibrary::general.field_name_title'))
+            Title::make(__('lasallesoftwarelibrarybackend::general.field_name_title'))
                 ->creationRules('unique:categories,title')
                 ->updateRules('unique:categories,title,{{resourceId}}')
             ,
 
-            Trix::make(__('lasallesoftwarelibrary::general.field_name_content'))
+            Trix::make(__('lasallesoftwarelibrarybackend::general.field_name_content'))
                 ->alwaysShow()
                 ->creationRules('required')
                 ->updateRules('required')
@@ -156,15 +156,15 @@ class Category extends BaseResource
             //->hideFromIndex()
             ,
 
-            Image::make( __('lasallesoftwarelibrary::general.field_name_featured_image'))
-                ->disk(config('lasallesoftware-library.lasalle_filesystem_disk_where_images_are_stored'))
+            Image::make( __('lasallesoftwarelibrarybackend::general.field_name_featured_image'))
+                ->disk(config('lasallesoftware-librarybackend.lasalle_filesystem_disk_where_images_are_stored'))
                 ->disableDownload()
                 ->help('<ul>
-                         <li>'. __('lasallesoftwarelibrary::general.field_help_optional') .'</li>
+                         <li>'. __('lasallesoftwarelibrarybackend::general.field_help_optional') .'</li>
                      </ul>'
                 )
                 ->squared('true')
-                ->path(config('lasallesoftware-library.image_path_for_category_nova_resource')),
+                ->path(config('lasallesoftware-librarybackend.image_path_for_category_nova_resource')),
 
             LookupEnabled::make('enabled'),
 
@@ -172,7 +172,7 @@ class Category extends BaseResource
 
             Uuid::make('uuid'),
 
-            new Panel(__('lasallesoftwarelibrary::general.panel_system_fields'), $this->systemFields()),
+            new Panel(__('lasallesoftwarelibrarybackend::general.panel_system_fields'), $this->systemFields()),
         ];
     }
 

@@ -21,7 +21,7 @@
  */
 
 // LaSalle Software
-use Lasallesoftware\Library\Database\Migrations\BaseMigration;
+use Lasallesoftware\Librarybackend\Database\Migrations\BaseMigration;
 
 // Laravel classes
 use Illuminate\Support\Facades\Schema;

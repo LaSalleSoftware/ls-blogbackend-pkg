@@ -23,8 +23,8 @@
 namespace Lasallesoftware\Blogbackend\Policies;
 
 // LaSalle Software class
-use Lasallesoftware\Library\Common\Policies\CommonPolicy;
-use Lasallesoftware\Library\Authentication\Models\Personbydomain as User;
+use Lasallesoftware\Librarybackend\Common\Policies\CommonPolicy;
+use Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain as User;
 use Lasallesoftware\Blogbackend\Models\Post as Model;
 
 // Laravel class
@@ -55,8 +55,8 @@ class PostPolicy extends CommonPolicy
     /**
      * Determine whether the user can view the post details.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Post                       $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Post                              $model
      * @return bool
      */
     public function view(User $user, Model $model)
@@ -81,7 +81,7 @@ class PostPolicy extends CommonPolicy
     /**
      * Determine whether the user can create posts.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
      * @return bool
      */
     public function create(User $user)
@@ -102,8 +102,8 @@ class PostPolicy extends CommonPolicy
     /**
      * Determine whether the user can update the posts.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Post                       $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Post                              $model
      * @return bool
      */
     public function update(User $user, Model $model)
@@ -133,8 +133,8 @@ class PostPolicy extends CommonPolicy
     /**
      * Determine whether the user can delete the posts.
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Post                       $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Post                              $model
      * @return bool
      */
     public function delete(User $user, Model $model)
@@ -166,8 +166,8 @@ class PostPolicy extends CommonPolicy
      *
      * DO NOT USE THIS FEATURE!
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Post                       $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Post                              $model
      * @return bool
      */
     public function restore(User $user, Model $model)
@@ -180,8 +180,8 @@ class PostPolicy extends CommonPolicy
      *
      * DO NOT USE THIS FEATURE!
      *
-     * @param  \Lasallesoftware\Library\Authentication\Models\Personbydomain  $user
-     * @param  \Lasallesoftware\Blogbackend\Models\Post                       $model
+     * @param  \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain  $user
+     * @param  \Lasallesoftware\Blogbackend\Models\Post                              $model
      * @return bool
      */
     public function forceDelete(User $user, Model $model)
