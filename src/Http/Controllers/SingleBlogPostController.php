@@ -23,7 +23,7 @@
 namespace Lasallesoftware\Blogbackend\Http\Controllers;
 
 // LaSalle Software
-use Lasallesoftware\Librarybackend\Common\Http\Controllers\CommonController;
+use Lasallesoftware\Blogbackend\Http\Controllers\AllBlogPostsBaseController;
 use Lasallesoftware\Blogbackend\Models\Post;
 
 // Laravel Framework
@@ -38,7 +38,7 @@ use Illuminate\Support\Facades\DB;
  *
  * @package Lasallesoftware\Blogbackend\Http\Controllers
  */
-class SingleBlogPostController extends CommonController
+class SingleBlogPostController extends AllBlogPostsBaseController
 {
     /**
      * Find the requested post, and provide the response.
