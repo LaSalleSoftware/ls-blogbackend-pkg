@@ -134,7 +134,7 @@ class Tag extends BaseResource
             BelongsTo::make('Installed_domain', 'installed_domain', 'Lasallesoftware\Novabackend\Nova\Resources\Installed_domain')
                 ->creationRules('required')
                 ->updateRules('required')
-                ->hideFromIndex()
+                //->hideFromIndex()
             ,
 
             Title::make(__('lasallesoftwarelibrarybackend::general.field_name_title'))
