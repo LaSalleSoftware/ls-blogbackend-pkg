@@ -64,30 +64,38 @@ class SingleBlogPostController extends AllBlogPostsBaseController
         // The post was found! Now do some checks...
 
         // ...does the post belong to the correct domain?
-        if (!$this->isPostBelongToTheCorrectDomain($request, $post)) {
+        if ($this->isPostBelongToTheCorrectDomain($request, $post)) {
             return response()->json([
                 'error'  => __('lasallesoftwareblogbackend::blogbackend.error_status_code_404'),
                 'reason' => __('lasallesoftwareblogbackend::blogbackend.error_reason_post_belongs_to_another_domain'),
             ], 404);
         }
 
+       
+
         // ...is the post enabled?
         if (!$post->enabled) {
 
-            return response()->json([
-                'error'  => __('lasallesoftwareblogbackend::blogbackend.error_status_code_404'),
-                'reason' => __('lasallesoftwareblogbackend::blogbackend.error_reason_post_is_not_enabled'),
-            ], 404);
+            // if the post is not supposed to be previewed in the front-end...
+            if (!$post->preview_in_frontend) {
+
+                return response()->json([
+                    'error'  => __('lasallesoftwareblogbackend::blogbackend.error_status_code_404'),
+                    'reason' => __('lasallesoftwareblogbackend::blogbackend.error_reason_post_is_not_enabled'),
+                ], 404);
+            }
         }
 
-        // ...is the post supposed to be published?
-        if ($post->publish_on > Carbon::now(null)  ) {
+
+        // ...is the post supposed to be published? If the post is supposed to be previewed in the front-end, then ignore this check
+        if (($post->publish_on > Carbon::now(null)) && (!$post->preview_in_frontend)) {
 
             return response()->json([
                 'error'  => __('lasallesoftwareblogbackend::blogbackend.error_status_code_404'),
                 'reason' => __('lasallesoftwareblogbackend::blogbackend.post_is_not_published'),
             ], 404);
         }
+
 
 
         // Checks pass. Let's gather all the data we need about this post...
@@ -108,6 +116,11 @@ class SingleBlogPostController extends AllBlogPostsBaseController
             'featured_image_type' => $featured_image['type'],
             'featured_image_social_meta_tag' => $featured_image['social_meta_tag'],
             'publish_on'          => $post->publish_on,
+
+            // "enabled" and "preview_in_frontend" included for the Preview in Frontend feature.
+            // See Lasallesoftware\Blogfrontend\Http\Controllers\DisplaySinglePostController
+            'enabled'             => $post->enabled,
+            'preview_in_frontend' => $post->preview_in_frontend,
         ];
 
         // ...put the tag info together

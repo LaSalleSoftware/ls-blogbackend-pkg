@@ -59,6 +59,7 @@ $factory->define(Lasallesoftware\Blogbackend\Models\Post::class, function (Faker
         'featured_image_code' => null,
         'featured_image_external_file' => 'https://unsplash.com/photos/V5Z4xV7WnEE',
         'enabled'             => 1,
+        'preview_in_frontend' => 0,
         'publish_on'          => $now,
         'uuid'                => (string)Str::uuid(),
         'created_at'          => $now,
@@ -69,4 +70,3 @@ $factory->define(Lasallesoftware\Blogbackend\Models\Post::class, function (Faker
         'locked_by'           => null,
     ];
 });
-

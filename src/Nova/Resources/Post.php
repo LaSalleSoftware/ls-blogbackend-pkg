@@ -34,6 +34,7 @@ use Lasallesoftware\Novabackend\Nova\Resources\BaseResource;
 // Laravel Nova classes
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Heading;
@@ -169,7 +170,14 @@ class Post extends BaseResource
                 ->creationRules('max:255')
                 ->updateRules('max:255'),
 
-            LookupEnabled::make('enabled'),
+            LookupEnabled::make(__('lasallesoftwarelibrarybackend::general.field_name_lookup_enabled')),
+
+            Boolean::make(__('lasallesoftwarelibrarybackend::general.field_name_preview_in_frontend'), 'preview_in_frontend')
+                ->help('<ul>
+                            <li>' . __('lasallesoftwarelibrarybackend::general.field_help_preview_in_frontend1') . '</li>
+                            <li>' . __('lasallesoftwarelibrarybackend::general.field_help_preview_in_frontend2') . '</li>
+                        </ul>')
+            ,
 
             Date::make(__('lasallesoftwarelibrarybackend::general.field_name_publish_on'))
                 ->format('DD MMM YYYY')
