@@ -64,7 +64,7 @@ class SingleBlogPostController extends AllBlogPostsBaseController
         // The post was found! Now do some checks...
 
         // ...does the post belong to the correct domain?
-        if ($this->isPostBelongToTheCorrectDomain($request, $post)) {
+        if (!$this->isPostBelongToTheCorrectDomain($request, $post)) {
             return response()->json([
                 'error'  => __('lasallesoftwareblogbackend::blogbackend.error_status_code_404'),
                 'reason' => __('lasallesoftwareblogbackend::blogbackend.error_reason_post_belongs_to_another_domain'),
