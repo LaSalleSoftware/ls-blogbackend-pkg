@@ -30,6 +30,12 @@ use Lasallesoftware\Blogbackend\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
+// Laravel Facade
+use Illuminate\Support\Facades\DB;
+
+// Third party classes
+use Carbon\CarbonImmutable;
+
 
 /**
  * Class HomepageBlogPostsController
@@ -62,12 +68,41 @@ class HomepageBlogPostsController extends AllBlogPostsBaseController
         // ...put the posts info together
         $transformedPosts = $this->getTransformedPosts($posts);
 
+        // Podcast episodes
+        if (class_exists('Lasallesoftware\Podcastbackend\Http\Controllers\PodcastBaseController')) {
+            $podcastShowIDs        = $request->input('podcast_shows');                // array
+            $numberPodcastEpisodes = $request->input('number_of_podcast_episodes');   // array
+
+            $transformedPodcastEpisodes = $this->getAllTransformedPodcastEpisodesForAllPodcastShows($podcastShowIDs, $numberPodcastEpisodes);
+        } else {
+            $transformedPodcastEpisodes = null;
+        }     
+
+        // Video episodes
+        if (class_exists('Lasallesoftware\Videobackend\Http\Controllers\VideoBaseController')) {
+            $videoShowIDs        = $request->input('video_shows');                // array
+            $numberVideoEpisodes = $request->input('number_of_video_episodes');   // array
+
+            $transformedVideoEpisodes = $this->getAllTransformedVideoEpisodesForAllVideoShows($videoShowIDs, $numberVideoEpisodes);
+        } else {
+            $transformedVideoEpisodes = null;
+        }
+        
+
         // Ok, let's send the data along.
         return response()->json([
-            'posts'         => $transformedPosts,
+            'posts'            => $transformedPosts,
+            'podcast_episodes' => $transformedPodcastEpisodes,
+            'video_episodes'   => $transformedVideoEpisodes,
         ], 200);
 
     }
+
+
+
+    // **************************************************************************************************************
+    // START: BLOG POSTS
+    // **************************************************************************************************************
 
     /**
      * Get recent posts.
@@ -100,4 +135,174 @@ class HomepageBlogPostsController extends AllBlogPostsBaseController
 
         return $numberPosts;
     }
+    // **************************************************************************************************************
+    // END: BLOG POSTS
+    // **************************************************************************************************************
+
+    
+
+    // **************************************************************************************************************
+    // START: PODCAST EPISODES
+    // **************************************************************************************************************
+
+    /**
+     * Get all the podcast episodes for all the podcast shows
+     *
+     * @param  array  $podcastShowIDs                A simple array of the podcast show ID's
+     * @param  int    $numberPodcastEpisodes         The number of podcast episodes to select
+     * @return void
+     */
+    private function getAllTransformedPodcastEpisodesForAllPodcastShows($podcastShowIDs, $numberPodcastEpisodes)
+    {
+        $transformedPodcastEpisodes = [];
+        
+        foreach ($podcastShowIDs as $podcastShowID) {
+            $episodes = $this->getRecentPodcastEpisodes($podcastShowID, $numberPodcastEpisodes);
+            $transformedPodcastEpisodes[] = $this->transformAllPodcastEpisodes($episodes);
+        }
+
+        return $transformedPodcastEpisodes;
+    }
+
+    /**
+     * Get recent podcast episodes
+     *
+     * @param  int   $podcastShowID                 ID of podcast_episodes table
+     * @param  int   $numberPodcastEpisodes         The number of podcast episodes to select
+     * @return collection | null
+     */
+    private function getRecentPodcastEpisodes($podcastShowID, $numberPodcastEpisodes)
+    {
+        return DB::table('podcast_episodes')
+            ->where([
+                ['podcast_show_id', '=', $podcastShowID],
+                ['website_enabled', '=', true],
+                ['website_publish_on', '<', CarbonImmutable::now(config('app.timezone'))],
+            ])
+            ->orderBy('website_publish_on', 'desc')
+            ->take($numberPodcastEpisodes)
+            ->get()
+        ;
+    }
+
+    /**
+     * Transform episodes
+     * 
+     * @param   collection  $podcastEpisodes      Collection of podcast episodes (retrieved from the database)
+     * @return  array
+     */
+    private function transformAllPodcastEpisodes($podcastEpisodes)
+    {
+        $transformedPodcastEpisodes = [];
+
+        foreach ($podcastEpisodes as $podcastEpisode) {
+            $transformedPodcastEpisodes[] = $this->transformPodcastEpisode($podcastEpisode);
+        }
+
+        return $transformedPodcastEpisodes;
+    }
+
+    /**
+     * Transform an individual podcast episode, specifically for the home page
+     *
+     * @param  object  $podcastEpisode
+     * @return array
+     */
+    private function transformPodcastEpisode($podcastEpisode)
+    {
+        return [
+            'podcast_show_id'         => $podcastEpisode->podcast_show_id,
+            'title'                   => $podcastEpisode->title,
+            'website_excerpt'         => $podcastEpisode->website_excerpt,
+            'website_featured_image'  => $podcastEpisode->website_featured_image,
+            'itunes_link'             => $podcastEpisode->itunes_link,
+            'website_publish_on'      => $podcastEpisode->website_publish_on,
+         ];
+    }
+    // **************************************************************************************************************
+    // END: PODCAST EPISODES
+    // **************************************************************************************************************
+
+
+
+    // **************************************************************************************************************
+    // START: VIDEO EPISODES
+    // **************************************************************************************************************
+
+    /**
+     * Get all the video episodes for all the video shows
+     *
+     * @param  array  $videoShowIDs                A simple array of the video show ID's
+     * @param  int    $numberVideoEpisodes         The number of video episodes to select
+     * @return void
+     */
+    private function getAllTransformedVideoEpisodesForAllVideoShows($videoShowIDs, $numberVideoEpisodes)
+    {
+        $transformedVideoEpisodes = [];
+        
+        foreach ($videoShowIDs as $videoShowID) {
+            $videoEpisodes = $this->getRecentVideoEpisodes($videoShowID, $numberVideoEpisodes);
+            $transformedVideoEpisodes[] = $this->transformAllVideoEpisodes($videoEpisodes);
+        }
+
+        return $transformedVideoEpisodes;
+    }
+
+    /**
+     * Get recent video episodes
+     *
+     * @param  int   $videoShowID                 ID of video_episodes table
+     * @param  int   $numberVideoEpisodes         The number of video episodes to select
+     * @return collection | null
+     */
+    private function getRecentVideoEpisodes($videoShowID, $numberVideoEpisodes)
+    {
+        return DB::table('video_episodes')
+            ->where([
+                ['video_show_id', '=', $videoShowID],
+                ['website_enabled', '=', true],
+                ['website_publish_on', '<', CarbonImmutable::now(config('app.timezone'))],
+            ])
+            ->orderBy('website_publish_on', 'desc')
+            ->take($numberVideoEpisodes)
+            ->get()
+        ;
+    }
+
+    /**
+     * Transform video episodes
+     * 
+     * @param   collection  $videoEpisodes      Collection of video episodes (retrieved from the database)
+     * @return  array
+     */
+    private function transformAllVideoEpisodes($videoEpisodes)
+    {
+        $transformedVideoEpisodes = [];
+
+        foreach ($videoEpisodes as $videoEpisode) {
+            $transformedVideoEpisodes[] = $this->transformVideoEpisode($videoEpisode);
+        }
+
+        return $transformedVideoEpisodes;
+    }
+
+    /**
+     * Transform an individual video episode, specifically for the home page
+     *
+     * @param  object  $videoEpisode
+     * @return array
+     */
+    private function transformVideoEpisode($videoEpisode)
+    {
+        return [
+            'video_show_id'           => $videoEpisode->video_show_id,
+            'title'                   => $videoEpisode->title,
+            'website_excerpt'         => $videoEpisode->website_excerpt,
+            'website_featured_image'  => $videoEpisode->website_featured_image,
+            'website_publish_on'      => $videoEpisode->website_publish_on,
+         ];
+    }    
+    // **************************************************************************************************************
+    // END: VIDEO EPISODES
+    // **************************************************************************************************************    
 }
