@@ -297,6 +297,7 @@ class HomepageBlogPostsController extends AllBlogPostsBaseController
         return [
             'video_show_id'           => $videoEpisode->video_show_id,
             'title'                   => $videoEpisode->title,
+            'slug'                    => $videoEpisode->slug,
             'website_excerpt'         => $videoEpisode->website_excerpt,
             'website_featured_image'  => $videoEpisode->website_featured_image,
             'website_publish_on'      => $videoEpisode->website_publish_on,
