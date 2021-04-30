@@ -68,22 +68,31 @@ class HomepageBlogPostsController extends AllBlogPostsBaseController
         // ...put the posts info together
         $transformedPosts = $this->getTransformedPosts($posts);
 
+
         // Podcast episodes
-        if (class_exists('Lasallesoftware\Podcastbackend\Http\Controllers\PodcastBaseController')) {
+        // process when the class exists in the back-end, and the front-end sent podcast_show ID's
+        if ( (class_exists('Lasallesoftware\Podcastbackend\Http\Controllers\PodcastBaseController')) &&
+             (! is_null($request->input('podcast_shows'))) )
+        {
             $podcastShowIDs        = $request->input('podcast_shows');                // array
             $numberPodcastEpisodes = $request->input('number_of_podcast_episodes');   // array
 
             $transformedPodcastEpisodes = $this->getAllTransformedPodcastEpisodesForAllPodcastShows($podcastShowIDs, $numberPodcastEpisodes);
         } else {
             $transformedPodcastEpisodes = null;
-        }     
+        }        
+
 
         // Video episodes
-        if (class_exists('Lasallesoftware\Videobackend\Http\Controllers\VideoBaseController')) {
+        // process when the class exists in the back-end, and the front-end sent video_show ID's
+        if ( (class_exists('Lasallesoftware\Podcastbackend\Http\Controllers\VideoBaseController')) &&
+             (! is_null($request->input('video_shows'))) ) 
+        {
             $videoShowIDs        = $request->input('video_shows');                // array
             $numberVideoEpisodes = $request->input('number_of_video_episodes');   // array
 
             $transformedVideoEpisodes = $this->getAllTransformedVideoEpisodesForAllVideoShows($videoShowIDs, $numberVideoEpisodes);
+
         } else {
             $transformedVideoEpisodes = null;
         }
