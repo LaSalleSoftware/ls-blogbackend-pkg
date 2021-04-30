@@ -216,6 +216,7 @@ class HomepageBlogPostsController extends AllBlogPostsBaseController
             'website_excerpt'         => $podcastEpisode->website_excerpt,
             'website_featured_image'  => $podcastEpisode->website_featured_image,
             'itunes_link'             => $podcastEpisode->itunes_link,
+            'itunes_enclosure_url'    => $podcastEpisode->itunes_enclosure_url,
             'website_publish_on'      => $podcastEpisode->website_publish_on,
          ];
     }
