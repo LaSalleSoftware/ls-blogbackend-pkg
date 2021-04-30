@@ -29,7 +29,7 @@ class Version
      *
      * @var string
      */
-    const VERSION = '2.3.4';
+    const VERSION = '2.3.5';
 
     /**
      * This package's release date.
