@@ -1,9 +1,13 @@
 # CHANGE LOG
 
-## VERSION 2.3.6 (coming!)
+## VERSION 2.3.7 (coming!)
+
+## VERSION 2.3.6 (May 10, 2021)
+* [v2.3.6 issues](https://github.com/LaSalleSoftware/ls-blogbackend-pkg/milestone/24?closed=1)
 
 ## VERSION 2.3.5 (April 30, 2021)
 * [v2.3.5 issues](https://github.com/LaSalleSoftware/ls-blogbackend-pkg/milestone/23?closed=1)
+
 ## VERSION 2.3.4 (April 30, 2021)
 * [v2.3.4 issues](https://github.com/LaSalleSoftware/ls-blogbackend-pkg/milestone/22?closed=1)
 
