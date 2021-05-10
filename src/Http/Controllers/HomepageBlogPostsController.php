@@ -85,7 +85,7 @@ class HomepageBlogPostsController extends AllBlogPostsBaseController
 
         // Video episodes
         // process when the class exists in the back-end, and the front-end sent video_show ID's
-        if ( (class_exists('Lasallesoftware\Podcastbackend\Http\Controllers\VideoBaseController')) &&
+        if ( (class_exists('Lasallesoftware\Videobackend\Http\Controllers\VideoBaseController')) &&
              (! is_null($request->input('video_shows'))) ) 
         {
             $videoShowIDs        = $request->input('video_shows');                // array
