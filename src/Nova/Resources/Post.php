@@ -132,7 +132,7 @@ class Post extends BaseResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function fields(Request $request)
+    public function fields(NovaRequest $request)
     {
         return [
             ID::make()->sortable(),
@@ -180,7 +180,7 @@ class Post extends BaseResource
             ,
 
             Date::make(__('lasallesoftwarelibrarybackend::general.field_name_publish_on'))
-                ->format('DD MMM YYYY')
+                // ->format('DD MMM YYYY')
                 ->help('<ul>
                          <li>' . __('lasallesoftwarelibrarybackend::general.field_help_publish_on1') . '</li>
                          <li>' . __('lasallesoftwarelibrarybackend::general.field_help_publish_on2') . '</li>
@@ -266,7 +266,7 @@ class Post extends BaseResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function cards(Request $request)
+    public function cards(NovaRequest $request)
     {
         return [];
     }
@@ -277,7 +277,7 @@ class Post extends BaseResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function filters(Request $request)
+    public function filters(NovaRequest $request)
     {
         return [];
     }
@@ -288,7 +288,7 @@ class Post extends BaseResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function lenses(Request $request)
+    public function lenses(NovaRequest $request)
     {
         return [];
     }
@@ -299,7 +299,7 @@ class Post extends BaseResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function actions(Request $request)
+    public function actions(NovaRequest $request)
     {
         return [];
     }
