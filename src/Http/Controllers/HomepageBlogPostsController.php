@@ -103,6 +103,7 @@ class HomepageBlogPostsController extends AllBlogPostsBaseController
             'posts'            => $transformedPosts,
             'podcast_episodes' => $transformedPodcastEpisodes,
             'video_episodes'   => $transformedVideoEpisodes,
+            'sponsors'         => $this->get_PHP_Serverless_Project_Sponsors(),
         ], 200);
 
     }

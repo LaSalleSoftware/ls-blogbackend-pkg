@@ -71,6 +71,7 @@ class AllCategoryBlogPostsController extends AllBlogPostsBaseController
             'posts'         => $transformedPosts,
             'prev_page_url' => $posts->previousPageUrl(),
             'next_page_url' => $posts->nextPageUrl(),
+            'sponsors'      => $this->get_PHP_Serverless_Project_Sponsors(),
         ], 200);
 
     }

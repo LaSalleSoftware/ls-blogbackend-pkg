@@ -134,6 +134,7 @@ class SingleBlogPostController extends AllBlogPostsBaseController
            'post'                => $transformedPost,
            'tags'                => $tags,
            'postupdates'         => $postUpdates,
+           'sponsors'            => $this->get_PHP_Serverless_Project_Sponsors(),
         ], 200);
 
     }
