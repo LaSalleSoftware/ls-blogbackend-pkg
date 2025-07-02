@@ -113,7 +113,7 @@ class BlogbackendServiceProvider extends ServiceProvider
 
         $this->registerPolicies();
 
-        $this->registerFactories();
+       // $this->registerFactories();
     }
 
     /**
