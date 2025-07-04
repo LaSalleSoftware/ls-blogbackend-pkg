@@ -1,5 +1,8 @@
 # CHANGE LOG
 
+## VERSION 3.2 (July 04, 2025)
+* [v3.2 issues](https://github.com/LaSalleSoftware/ls-blogbackend-pkg/milestone/32?closed=1)
+
 ## VERSION 3.1 (July 02, 2025)
 * [v3.1 issues](https://github.com/LaSalleSoftware/ls-blogbackend-pkg/milestone/31?closed=1)
 
