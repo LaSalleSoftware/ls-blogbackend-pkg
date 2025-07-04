@@ -63,6 +63,8 @@ class CreatePostsTable extends BaseMigration
                 }                
                 $table->foreign('category_id')->references('id')->on('categories');
 
+                $this->createForeignIdFieldAndReference('categories', 'id', 'category_id', $table, false, true);
+
 
                 $table->string('title');
                 $table->string('slug')->unique();
