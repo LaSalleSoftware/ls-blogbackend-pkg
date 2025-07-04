@@ -51,13 +51,29 @@ class CreatePostupdatesTable extends BaseMigration
 
                 $table->increments('id');
 
-                $table->integer('installed_domain_id')->unsigned()->comment('The domain.');
+                
+                if ($this->getColumnType('installed_domains', 'id') == "int") {
+                    $table->integer('installed_domain_id')->unsigned()->comment('The domain.');
+                } 
+                if ($this->getColumnType('installed_domains', 'id') == "biginit") {
+                    $table->bigInteger('installed_domain_id')->unsigned()->comment('The domain.');
+                }
                 $table->foreign('installed_domain_id')->references('id')->on('installed_domains')->onDelete('cascade');
 
-                $table->integer('personbydomain_id')->unsigned()->comment('The author.');
+                if ($this->getColumnType('personbydomains', 'id') == "int") {
+                    $table->integer('personbydomain_id')->unsigned()->comment('The author.');
+                } 
+                if ($this->getColumnType('personbydomains', 'id') == "biginit") {
+                    $$table->bigInteger('personbydomain_id')->unsigned()->comment('The author.');
+                }
                 $table->foreign('personbydomain_id')->references('id')->on('personbydomains')->onDelete('cascade');
-
-                $table->integer('post_id')->unsigned();
+                
+                if ($this->getColumnType('posts', 'id') == "int") {
+                    $table->integer('post_id')->unsigned();
+                } 
+                if ($this->getColumnType('posts', 'id') == "biginit") {
+                    $table->bigInteger('post_id')->unsigned();
+                }
                 $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
 
                 $table->string('title');

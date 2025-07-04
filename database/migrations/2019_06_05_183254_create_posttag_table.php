@@ -51,9 +51,22 @@ class CreatePosttagTable extends BaseMigration
 
                 $table->increments('id');
 
-                $table->integer('post_id')->unsigned()->index();
+
+                if ($this->getColumnType('posts', 'id') == "int") {
+                    $table->integer('post_id')->unsigned()->index();
+                } 
+                if ($this->getColumnType('posts', 'id') == "biginit") {
+                    $table->bigInteger('post_id')->unsigned()->index();
+                }
                 $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-                $table->integer('tag_id')->unsigned()->index();
+
+
+                if ($this->getColumnType('tags', 'id') == "int") {
+                    $table->integer('tag_id')->unsigned()->index();
+                } 
+                if ($this->getColumnType('tags', 'id') == "biginit") {
+                    $table->bigInteger('tag_id')->unsigned()->index();
+                }
                 $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
             });
         }

@@ -51,14 +51,18 @@ class CreatePostsTable extends BaseMigration
 
                 $table->increments('id');
 
-                $table->integer('installed_domain_id')->unsigned()->comment('The domain.');
-                $table->foreign('installed_domain_id')->references('id')->on('installed_domains');
+                $this->createForeignIdFieldAndReference('installed_domains', 'id', 'installed_domain_id', $table, false);
 
-                $table->integer('personbydomain_id')->unsigned()->comment('The author.');
-                $table->foreign('personbydomain_id')->references('id')->on('personbydomains');
+                $this->createForeignIdFieldAndReference('personbydomains', 'id', 'personbydomain_id', $table, false);
 
-                $table->integer('category_id')->unsigned()->nullable();
+                if ($this->getColumnType('categories', 'id') == "int") {
+                    $table->integer('category_id')->unsigned()->nullable();
+                } 
+                if ($this->getColumnType('categories', 'id') == "biginit") {
+                    $table->bigInteger('category_id')->unsigned()->nullable();
+                }                
                 $table->foreign('category_id')->references('id')->on('categories');
+
 
                 $table->string('title');
                 $table->string('slug')->unique();

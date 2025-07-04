@@ -51,8 +51,7 @@ class CreateCategoriesTable extends BaseMigration
 
                 $table->increments('id');
 
-                $table->integer('installed_domain_id')->unsigned()->comment('The domain.');
-                $table->foreign('installed_domain_id')->references('id')->on('installed_domains');
+                $this->createForeignIdFieldAndReference('installed_domains', 'id', 'installed_domain_id', $table, false);
 
                 $table->string('title')->unique();
                 $table->text('content')->nullable();
