@@ -55,14 +55,6 @@ class CreatePostsTable extends BaseMigration
 
                 $this->createForeignIdFieldAndReference('personbydomains', 'id', 'personbydomain_id', $table, false);
 
-                if ($this->getColumnType('categories', 'id') == "int") {
-                    $table->integer('category_id')->unsigned()->nullable();
-                } 
-                if ($this->getColumnType('categories', 'id') == "biginit") {
-                    $table->bigInteger('category_id')->unsigned()->nullable();
-                }                
-                $table->foreign('category_id')->references('id')->on('categories');
-
                 $this->createForeignIdFieldAndReference('categories', 'id', 'category_id', $table, false, true);
 
 
